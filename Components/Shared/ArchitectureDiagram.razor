@@ -1,0 +1,161 @@
+<div class="diagram-wrapper" data-purpose="diagram-container">
+    <!-- Subtle Grid Background -->
+    <div class="bg-tech-grid grid-layer"></div>
+
+    <!-- Card Header -->
+    <div class="diagram-header">
+        <span class="diagram-title font-mono-code">ARCHITECTURE BLOCK DIAGRAM</span>
+        <span class="badge badge-cyan">INTERACTIVE</span>
+    </div>
+
+    <!-- Interactive Node Diagram Flow Canvas with SVG Connections -->
+    <div class="diagram-canvas">
+        <!-- SVG Dashed Connector Layer -->
+        <svg class="connections-layer" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 100 100">
+            <defs>
+                <marker id="arrow-cyan" markerHeight="4" markerWidth="4" orient="auto-start-reverse" refX="5" refY="5" viewBox="0 0 10 10">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"></path>
+                </marker>
+                <marker id="arrow-purple" markerHeight="4" markerWidth="4" orient="auto-start-reverse" refX="5" refY="5" viewBox="0 0 10 10">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#818cf8"></path>
+                </marker>
+                <marker id="arrow-slate" markerHeight="4" markerWidth="4" orient="auto-start-reverse" refX="5" refY="5" viewBox="0 0 10 10">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"></path>
+                </marker>
+            </defs>
+
+            <!-- Top Row Horizontal: Android -> WebSocket Gateway -->
+            <line x1="28" y1="23" x2="38" y2="23" stroke="#64748b" stroke-width="0.8" stroke-dasharray="2,2" />
+            
+            <!-- Top Row Horizontal: WebSocket -> Event Bus -->
+            <line x1="62" y1="23" x2="72" y2="23" stroke="#64748b" stroke-width="0.8" stroke-dasharray="2,2" />
+
+            <!-- Vertical: Android Client down to Task Orchestrator -->
+            <line x1="18" y1="36" x2="18" y2="64" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="2,2" marker-end="url(#arrow-cyan)" />
+
+            <!-- Vertical: WebSocket Gateway down to Conflict Resolver -->
+            <line x1="50" y1="36" x2="50" y2="64" stroke="#64748b" stroke-width="0.8" stroke-dasharray="2,2" />
+
+            <!-- Vertical: Event Bus down to Persistence Layer -->
+            <line x1="82" y1="36" x2="82" y2="64" stroke="#64748b" stroke-width="0.8" stroke-dasharray="2,2" />
+
+            <!-- Bottom Row Horizontal: Task Orchestrator -> Conflict Resolver -->
+            <line x1="28" y1="78" x2="38" y2="78" stroke="#64748b" stroke-width="0.8" stroke-dasharray="2,2" />
+
+            <!-- Bottom Row Horizontal: Conflict Resolver -> Persistence Layer -->
+            <line x1="62" y1="78" x2="72" y2="78" stroke="#64748b" stroke-width="0.8" stroke-dasharray="2,2" />
+        </svg>
+
+        <!-- Node Flow Elements: 2 Rows x 3 Columns -->
+        <div class="nodes-container">
+            <!-- Top Row Nodes -->
+            <div class="nodes-row">
+                <!-- Node: Android Client -->
+                <div class="node-card node-purple @(SelectedNode?.Id == "android-client" ? "selected" : "")" 
+                     @onclick="@(() => ToggleNode("android-client"))">
+                    <div class="node-main-title">Android Client</div>
+                    <div class="node-sub-title font-mono-code">MVVM + Compose</div>
+                </div>
+
+                <!-- Node: WebSocket Gateway -->
+                <div class="node-card node-cyan @(SelectedNode?.Id == "websocket-gateway" ? "selected" : "")" 
+                     @onclick="@(() => ToggleNode("websocket-gateway"))">
+                    <div class="node-main-title">WebSocket Gateway</div>
+                    <div class="node-sub-title font-mono-code">Netty NIO</div>
+                </div>
+
+                <!-- Node: Event Bus -->
+                <div class="node-card node-emerald @(SelectedNode?.Id == "event-bus" ? "selected" : "")" 
+                     @onclick="@(() => ToggleNode("event-bus"))">
+                    <div class="node-main-title">Event Bus</div>
+                    <div class="node-sub-title font-mono-code">Kafka Streams</div>
+                </div>
+            </div>
+
+            <!-- Bottom Row Nodes -->
+            <div class="nodes-row">
+                <!-- Node: Task Orchestrator -->
+                <div class="node-card node-purple @(SelectedNode?.Id == "task-orchestrator" ? "selected" : "")" 
+                     @onclick="@(() => ToggleNode("task-orchestrator"))">
+                    <div class="node-main-title">Task Orchestrator</div>
+                    <div class="node-sub-title font-mono-code">Spring Boot</div>
+                </div>
+
+                <!-- Node: Conflict Resolver -->
+                <div class="node-card node-amber @(SelectedNode?.Id == "conflict-resolver" ? "selected" : "")" 
+                     @onclick="@(() => ToggleNode("conflict-resolver"))">
+                    <div class="node-main-title">Conflict Resolver</div>
+                    <div class="node-sub-title font-mono-code">Vector Clocks</div>
+                </div>
+
+                <!-- Node: Persistence Layer -->
+                <div class="node-card node-teal @(SelectedNode?.Id == "persistence-layer" ? "selected" : "")" 
+                     @onclick="@(() => ToggleNode("persistence-layer"))">
+                    <div class="node-main-title">Persistence Layer</div>
+                    <div class="node-sub-title font-mono-code">PostgreSQL + Redis</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Node Inspector Drawer -->
+    @if (SelectedNode != null)
+    {
+        <div class="node-inspector">
+            <div class="inspector-header">
+                <div class="inspector-badge-row font-mono-code">
+                    <span class="badge badge-@SelectedNode.ThemeColor">NODE SPECIFICATION</span>
+                    <span class="inspector-throughput">@SelectedNode.Throughput</span>
+                </div>
+                <button class="inspector-close" @onclick="@(() => SelectedNode = null)">×</button>
+            </div>
+            <h4 class="inspector-title font-mono-code">@SelectedNode.Name <span class="inspector-sub">(@SelectedNode.Subtitle)</span></h4>
+            <p class="inspector-desc">@SelectedNode.Description</p>
+            
+            <div class="inspector-grid font-mono-code">
+                <div class="inspector-item">
+                    <span class="item-label">TECHNOLOGY:</span>
+                    <span class="item-val">@SelectedNode.TechStack</span>
+                </div>
+                <div class="inspector-item">
+                    <span class="item-label">PROTOCOL:</span>
+                    <span class="item-val">@SelectedNode.Protocol</span>
+                </div>
+                <div class="inspector-item full-width">
+                    <span class="item-label">FAILURE MODE:</span>
+                    <span class="item-val text-amber">@SelectedNode.FailureMode</span>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="hint-message font-mono-code">
+            <span>Tip: Click any architecture node above to inspect runtime specs and protocols</span>
+        </div>
+    }
+
+    <!-- Bottom subtle indicator inside card -->
+    <div class="diagram-footer">
+        <span class="overview-tag font-mono-code">• SYSTEM OVERVIEW •</span>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public IReadOnlyList<SystemTopologyNode>? Nodes { get; set; }
+
+    private SystemTopologyNode? SelectedNode { get; set; }
+
+    private void ToggleNode(string nodeId)
+    {
+        if (SelectedNode?.Id == nodeId)
+        {
+            SelectedNode = null;
+        }
+        else
+        {
+            SelectedNode = Nodes?.FirstOrDefault(n => n.Id == nodeId);
+        }
+    }
+}

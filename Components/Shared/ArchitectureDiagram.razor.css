@@ -1,0 +1,225 @@
+.diagram-wrapper {
+  position: relative;
+  border-radius: 1rem;
+  background-color: rgba(13, 19, 31, 0.95);
+  border: 1px solid #1e293b;
+  padding: 1.5rem;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+}
+
+.grid-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.diagram-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.diagram-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.diagram-canvas {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0;
+  min-height: 280px;
+}
+
+.connections-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nodes-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+}
+
+.nodes-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .nodes-row {
+    gap: 1.25rem;
+  }
+}
+
+.node-main-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 640px) {
+  .node-main-title {
+    font-size: 0.8125rem;
+  }
+}
+
+.node-sub-title {
+  font-size: 0.625rem;
+  margin-top: 0.25rem;
+  opacity: 0.85;
+}
+
+.node-inspector {
+  position: relative;
+  z-index: 10;
+  margin-top: 1.5rem;
+  background-color: #070a12;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  animation: slideDown 0.2s ease-out;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.inspector-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.inspector-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.inspector-throughput {
+  font-size: 0.6875rem;
+  color: #38bdf8;
+}
+
+.inspector-close {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.inspector-close:hover {
+  color: #ffffff;
+}
+
+.inspector-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+}
+
+.inspector-sub {
+  color: #818cf8;
+  font-weight: normal;
+}
+
+.inspector-desc {
+  font-size: 0.8125rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin-bottom: 0.875rem;
+}
+
+.inspector-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+}
+
+@media (min-width: 640px) {
+  .inspector-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.inspector-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.inspector-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.item-label {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.item-val {
+  color: #cbd5e1;
+}
+
+.text-amber {
+  color: #fed7aa;
+}
+
+.hint-message {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  font-size: 0.6875rem;
+  color: #475569;
+  margin-top: 1rem;
+}
+
+.diagram-footer {
+  position: relative;
+  z-index: 10;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.overview-tag {
+  font-size: 0.625rem;
+  color: #475569;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

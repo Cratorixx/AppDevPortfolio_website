@@ -1,0 +1,110 @@
+@page "/architecture"
+@page "/case-study/flowtrack"
+@inject IPortfolioService PortfolioService
+
+<PageTitle>FlowTrack: System Design Deep Dive</PageTitle>
+
+<main class="container-max arch-main">
+    <!-- Title Section -->
+    <section class="arch-title-section" data-purpose="page-title-section">
+        <div class="case-study-pill font-mono-code">
+            @(CaseStudy?.Subtitle ?? "03 · SYSTEM CASE STUDY")
+        </div>
+        <h1 class="arch-page-title">
+            @(CaseStudy?.Title ?? "FlowTrack: System Design Deep Dive")
+        </h1>
+    </section>
+
+    <!-- Grid Container: Two main columns (Left details, Right architecture diagram) -->
+    <div class="arch-grid">
+        <!-- Left Column: Problem, Solution, Data Structures, Hurdles, Metrics -->
+        <div class="arch-left-col">
+            <!-- Card 1: PROBLEM -->
+            <div class="detail-card" data-purpose="problem-card">
+                <div class="card-status-header text-rose font-mono-code">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                        <path d="M12 3l10 18H2L12 3z"></path>
+                    </svg>
+                    <span>PROBLEM</span>
+                </div>
+                <p class="detail-card-text">
+                    @(CaseStudy?.Problem ?? "Teams needed real-time task sync across unstable mobile connections without data loss or conflicts.")
+                </p>
+            </div>
+
+            <!-- Card 2: SOLUTION -->
+            <div class="detail-card" data-purpose="solution-card">
+                <div class="card-status-header text-emerald font-mono-code">
+                    <span class="dot-emerald-static"></span>
+                    <span>SOLUTION</span>
+                </div>
+                <p class="detail-card-text">
+                    @(CaseStudy?.Solution ?? "Event-sourced state with vector clocks for conflict detection; optimistic UI updates reverted on conflict; WebSocket with HTTP/2 fallback.")
+                </p>
+            </div>
+
+            <!-- Card 3: DATA STRUCTURES USED -->
+            <div class="detail-card" data-purpose="data-structures-card">
+                <h2 class="section-sub-title font-mono-code">DATA STRUCTURES USED</h2>
+                <ul class="data-structures-list">
+                    @if (CaseStudy?.DataStructures != null)
+                    {
+                        @foreach (var ds in CaseStudy.DataStructures)
+                        {
+                            <li class="ds-item">
+                                <span class="cyan-bullet"></span>
+                                <span>@ds</span>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+
+            <!-- Card 4: TECHNICAL HURDLES OVERCOME -->
+            <div class="detail-card" data-purpose="hurdles-card">
+                <h2 class="section-sub-title font-mono-code">TECHNICAL HURDLES OVERCOME</h2>
+                <div class="hurdles-list">
+                    @if (CaseStudy?.TechnicalHurdles != null)
+                    {
+                        @foreach (var hurdle in CaseStudy.TechnicalHurdles)
+                        {
+                            <div class="hurdle-item">
+                                <span class="hurdle-num font-mono-code">@hurdle.Number</span>
+                                <div class="hurdle-content">
+                                    <h3 class="hurdle-title">@hurdle.Title</h3>
+                                    <p class="hurdle-desc">@hurdle.Description</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+
+            <!-- Card 5: Bottom Mini Metrics Row -->
+            <div class="mini-metrics-row" data-purpose="metrics-preview">
+                <div class="mini-metric-card">
+                    <span class="mini-metric-val">@(CaseStudy?.CrashFreeRate ?? "98.3%")</span>
+                    <span class="mini-metric-lbl">crash-free</span>
+                </div>
+                <div class="mini-metric-card">
+                    <span class="mini-metric-val">@(CaseStudy?.StoreRating ?? "4.6★")</span>
+                    <span class="mini-metric-lbl">Play Store</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Architecture Diagram -->
+        <div class="arch-right-col">
+            <ArchitectureDiagram Nodes="CaseStudy?.Nodes" />
+        </div>
+    </div>
+</main>
+
+@code {
+    private CaseStudyDetail? CaseStudy { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        CaseStudy = await PortfolioService.GetCaseStudyAsync("flowtrack");
+    }
+}

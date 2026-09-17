@@ -1,0 +1,39 @@
+C:\Users\L23Y16W12\Desktop\App Dev\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\L23Y16W12\Desktop\App Dev\bin\Debug\net8.0\appsettings.json
+C:\Users\L23Y16W12\Desktop\App Dev\bin\Debug\net8.0\App_Dev.staticwebassets.runtime.json
+C:\Users\L23Y16W12\Desktop\App Dev\bin\Debug\net8.0\App_Dev.exe
+C:\Users\L23Y16W12\Desktop\App Dev\bin\Debug\net8.0\App_Dev.deps.json
+C:\Users\L23Y16W12\Desktop\App Dev\bin\Debug\net8.0\App_Dev.runtimeconfig.json
+C:\Users\L23Y16W12\Desktop\App Dev\bin\Debug\net8.0\App_Dev.dll
+C:\Users\L23Y16W12\Desktop\App Dev\bin\Debug\net8.0\App_Dev.pdb
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\App Dev.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\App Dev.AssemblyInfoInputs.cache
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\App Dev.AssemblyInfo.cs
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\App Dev.csproj.CoreCompileInputs.cache
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\App_Dev.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\staticwebassets\msbuild.App_Dev.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\staticwebassets\msbuild.build.App_Dev.props
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.App_Dev.props
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.App_Dev.props
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\scopedcss\Components\Layout\MainLayout.razor.rz.scp.css
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\scopedcss\bundle\App_Dev.styles.css
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\scopedcss\projectbundle\App_Dev.bundle.scp.css
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\App_Dev.dll
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\refint\App_Dev.dll
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\App_Dev.pdb
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\App Dev.genruntimeconfig.cache
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\ref\App_Dev.dll
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\scopedcss\Components\Layout\Footer.razor.rz.scp.css
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\scopedcss\Components\Layout\NavBar.razor.rz.scp.css
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\scopedcss\Components\Pages\Home.razor.rz.scp.css
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\scopedcss\Components\Pages\Projects.razor.rz.scp.css
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\scopedcss\Components\Pages\SystemDesign.razor.rz.scp.css
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\scopedcss\Components\Shared\ArchitectureDiagram.razor.rz.scp.css
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\scopedcss\Components\Shared\ContactModal.razor.rz.scp.css
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\scopedcss\Components\Shared\ProjectCard.razor.rz.scp.css
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\scopedcss\Components\Shared\ProjectHeroCard.razor.rz.scp.css
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\scopedcss\Components\Shared\TaskSimulationPreview.razor.rz.scp.css
+C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\scopedcss\Components\Shared\TerminalWindow.razor.rz.scp.css

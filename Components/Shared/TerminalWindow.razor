@@ -1,0 +1,181 @@
+@implements IDisposable
+@inject IPortfolioService PortfolioService
+
+<div class="terminal-card" data-purpose="terminal-preview-card">
+    <!-- Top Terminal Bar: Tabs & Live Clock -->
+    <div class="terminal-header">
+        <!-- Switcher Buttons -->
+        <div class="tab-group">
+            <button class="tab-btn @(ActiveTab == "code" ? "tab-active-cyan" : "")" 
+                    @onclick="@(() => SetTab("code"))">
+                CODE PREVIEW
+            </button>
+            <button class="tab-btn @(ActiveTab == "arch" ? "tab-active-purple" : "")" 
+                    @onclick="@(() => SetTab("arch"))">
+                ARCH MAP
+            </button>
+            <button class="tab-btn @(ActiveTab == "both" ? "tab-active-emerald" : "")" 
+                    @onclick="@(() => SetTab("both"))">
+                SPLIT VIEW
+            </button>
+        </div>
+
+        <!-- Live Indicator & Clock -->
+        <div class="live-clock-badge">
+            <span class="live-dot"></span>
+            <span class="live-time">LIVE · @CurrentTime</span>
+        </div>
+    </div>
+
+    <!-- Upper Panel: Kotlin Code IDE Window (visible in "code" or "both") -->
+    @if (ActiveTab == "code" || ActiveTab == "both")
+    {
+        <div class="ide-sub-window" data-purpose="ide-sub-window">
+            <!-- Code Title Bar with macOS dots and Kotlin Tag -->
+            <div class="ide-title-bar">
+                <div class="window-controls">
+                    <span class="mac-dot mac-close"></span>
+                    <span class="mac-dot mac-min"></span>
+                    <span class="mac-dot mac-max"></span>
+                    <span class="file-name">TaskOrchestrator.kt</span>
+                </div>
+                <div class="ide-actions">
+                    <button class="copy-btn" @onclick="CopyCode" title="Copy code">
+                        @(IsCopied ? "Copied ✓" : "Copy")
+                    </button>
+                    <span class="badge badge-emerald">Kotlin</span>
+                </div>
+            </div>
+
+            <!-- Syntax-Highlighted Kotlin Code Snippet -->
+            <div class="code-editor-body custom-scrollbar">
+                <div class="code-line" data-line="1">
+                    <span class="code-keyword">class</span> <span class="code-class">TaskOrchestrator</span> {
+                </div>
+                <div class="code-line" data-line="2">
+                    <span class="code-keyword" style="padding-left: 1rem;">private val</span> <span class="code-prop">queue</span> =
+                </div>
+                <div class="code-line" data-line="3">
+                    <span class="code-type" style="padding-left: 2rem;">PriorityBlockingQueue</span>&lt;<span class="code-type">Task</span>&gt;()
+                </div>
+                <div class="code-line" data-line="4"> </div>
+                <div class="code-line" data-line="5">
+                    <span class="code-keyword" style="padding-left: 1rem;">fun</span> <span class="code-function">dispatch</span>(task: <span class="code-type">Task</span>) {
+                </div>
+                <div class="code-line" data-line="6">
+                    <span class="code-prop" style="padding-left: 2rem;">queue</span>.<span class="code-method">offer</span>(task)
+                </div>
+                <div class="code-line" data-line="7">
+                    <span class="code-suspend" style="padding-left: 2rem;">syncToRemote</span>(task.<span class="code-prop">id</span>)
+                </div>
+                <div class="code-line" data-line="8">
+                    <span style="padding-left: 1rem;">}</span>
+                </div>
+                <div class="code-line" data-line="9"> </div>
+                <div class="code-line" data-line="10">
+                    <span class="code-keyword" style="padding-left: 1rem;">suspend fun</span> <span class="code-suspend">syncToRemote</span>(
+                </div>
+                <div class="code-line" data-line="11">
+                    <span class="code-prop" style="padding-left: 2rem;">id</span>: <span class="code-type">UUID</span>
+                </div>
+                <div class="code-line" data-line="12">
+                    <span style="padding-left: 1rem;">) =</span> <span class="code-keyword">withContext</span>(<span class="code-function">IO</span>) {
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Lower Panel: System Topology Architecture Node Map (visible in "arch" or "both") -->
+    @if (ActiveTab == "arch" || ActiveTab == "both")
+    {
+        <div class="topology-panel" data-purpose="topology-map">
+            <div class="topology-grid">
+                @if (Nodes != null)
+                {
+                    @foreach (var node in Nodes)
+                    {
+                        <div class="topology-node @GetNodeClass(node.ThemeColor) @(SelectedNodeId == node.Id ? "node-active" : "")"
+                             @onclick="@(() => SelectNode(node))">
+                            <div class="node-title font-mono-code">@node.Name</div>
+                            <div class="node-subtitle">@node.Subtitle</div>
+                        </div>
+                    }
+                }
+            </div>
+
+            @if (SelectedNode != null)
+            {
+                <div class="node-detail-banner">
+                    <div class="banner-top">
+                        <span class="banner-title font-mono-code">@SelectedNode.Name · <span class="text-cyan">@SelectedNode.Throughput</span></span>
+                        <button class="banner-close" @onclick="@(() => SelectedNodeId = null)">×</button>
+                    </div>
+                    <div class="banner-desc">@SelectedNode.Description</div>
+                    <div class="banner-meta font-mono-code">
+                        <span>Stack: @SelectedNode.TechStack</span>
+                        <span>Protocol: @SelectedNode.Protocol</span>
+                    </div>
+                </div>
+            }
+
+            <!-- Bottom Right Tag Indicator -->
+            <div class="topology-footer">
+                <span class="topology-tag font-mono-code">SYSTEM TOPOLOGY V2.1</span>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private string ActiveTab { get; set; } = "both";
+    private string CurrentTime { get; set; } = DateTime.Now.ToString("HH:mm:ss");
+    private Timer? _clockTimer;
+    private IReadOnlyList<SystemTopologyNode>? Nodes { get; set; }
+    private string? SelectedNodeId { get; set; }
+    private SystemTopologyNode? SelectedNode => Nodes?.FirstOrDefault(n => n.Id == SelectedNodeId);
+    private bool IsCopied { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Nodes = await PortfolioService.GetTopologyNodesAsync();
+
+        // Reactive Timer for the terminal live clock
+        _clockTimer = new Timer(async _ =>
+        {
+            CurrentTime = DateTime.Now.ToString("HH:mm:ss");
+            await InvokeAsync(StateHasChanged);
+        }, null, 1000, 1000);
+    }
+
+    private void SetTab(string tab)
+    {
+        ActiveTab = tab;
+    }
+
+    private void SelectNode(SystemTopologyNode node)
+    {
+        SelectedNodeId = SelectedNodeId == node.Id ? null : node.Id;
+    }
+
+    private string GetNodeClass(string theme) => theme switch
+    {
+        "purple" => "node-purple",
+        "cyan" => "node-cyan",
+        "teal" => "node-teal",
+        "emerald" => "node-emerald",
+        "amber" => "node-amber",
+        _ => "node-cyan"
+    };
+
+    private async Task CopyCode()
+    {
+        IsCopied = true;
+        await Task.Delay(2000);
+        IsCopied = false;
+    }
+
+    public void Dispose()
+    {
+        _clockTimer?.Dispose();
+    }
+}

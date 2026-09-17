@@ -1,0 +1,93 @@
+@page "/work"
+@page "/projects"
+@inject IPortfolioService PortfolioService
+
+<PageTitle>Projects &amp; Case Studies Portfolio</PageTitle>
+
+<main class="container-max projects-main">
+    <!-- Section Header & Filter Tabs -->
+    <section aria-label="Section Header" class="projects-header-section">
+        <!-- Monospace Pill Badge -->
+        <div class="header-badge badge-glow font-mono-code">
+            <span>02</span>
+            <span class="badge-dot">•</span>
+            <span>SELECTED WORK</span>
+        </div>
+
+        <!-- Main Title & Filters Row -->
+        <div class="title-filters-row">
+            <h1 class="page-title">
+                Projects &amp; <span class="glow-cyan-text">Case Studies</span>
+            </h1>
+
+            <!-- Category Filters -->
+            <div class="filter-tabs-bar custom-scrollbar font-mono-code">
+                <button class="filter-tab @(SelectedCategory == ProjectCategory.All ? "filter-active" : "")"
+                        @onclick="@(() => SetCategory(ProjectCategory.All))">
+                    All
+                </button>
+                <button class="filter-tab @(SelectedCategory == ProjectCategory.MobileApps ? "filter-active" : "")"
+                        @onclick="@(() => SetCategory(ProjectCategory.MobileApps))">
+                    Mobile Apps
+                </button>
+                <button class="filter-tab @(SelectedCategory == ProjectCategory.BackendConcurrency ? "filter-active" : "")"
+                        @onclick="@(() => SetCategory(ProjectCategory.BackendConcurrency))">
+                    Backend &amp; Concurrency
+                </button>
+                <button class="filter-tab @(SelectedCategory == ProjectCategory.UIUX ? "filter-active" : "")"
+                        @onclick="@(() => SetCategory(ProjectCategory.UIUX))">
+                    UI/UX
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEGIN: Featured Project Hero Card (FlowTrack) -->
+    @if (FeaturedProject != null && (SelectedCategory == ProjectCategory.All || SelectedCategory == ProjectCategory.MobileApps))
+    {
+        <ProjectHeroCard Project="FeaturedProject" />
+    }
+
+    <!-- BEGIN: Secondary Project Cards Grid -->
+    <section aria-label="Additional Projects" class="secondary-projects-grid">
+        @if (SecondaryProjects != null)
+        {
+            @foreach (var project in SecondaryProjects)
+            {
+                <ProjectCard Project="project" />
+            }
+        }
+    </section>
+
+    @if (SecondaryProjects?.Count == 0 && (FeaturedProject == null || (SelectedCategory != ProjectCategory.All && SelectedCategory != ProjectCategory.MobileApps)))
+    {
+        <div class="empty-state font-mono-code">
+            <p>No projects match the selected filter category.</p>
+            <button class="btn btn-secondary mt-3" @onclick="@(() => SetCategory(ProjectCategory.All))">Reset Filters</button>
+        </div>
+    }
+</main>
+
+@code {
+    private ProjectCategory SelectedCategory { get; set; } = ProjectCategory.All;
+    private ProjectItem? FeaturedProject { get; set; }
+    private IReadOnlyList<ProjectItem>? SecondaryProjects { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProjectsAsync();
+    }
+
+    private async Task SetCategory(ProjectCategory category)
+    {
+        SelectedCategory = category;
+        await LoadProjectsAsync();
+    }
+
+    private async Task LoadProjectsAsync()
+    {
+        var allProjects = await PortfolioService.GetProjectsAsync(SelectedCategory);
+        FeaturedProject = allProjects.FirstOrDefault(p => p.IsFeatured);
+        SecondaryProjects = allProjects.Where(p => !p.IsFeatured).ToList();
+    }
+}

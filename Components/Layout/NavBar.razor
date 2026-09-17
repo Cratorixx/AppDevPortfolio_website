@@ -1,0 +1,107 @@
+<header class="site-header" data-purpose="site-header">
+    <div class="container-max header-inner">
+        <!-- Left Monogram Avatar -->
+        <div class="header-left">
+            <NavLink href="" class="monogram-avatar" Match="NavLinkMatch.All" aria-label="Home">
+                AK
+            </NavLink>
+        </div>
+
+        <!-- Center Navigation Links -->
+        <nav class="main-nav @(IsMobileMenuOpen ? "mobile-open" : "")" aria-label="Main Navigation">
+            <NavLink href="" Match="NavLinkMatch.All" class="nav-link" @onclick="CloseMobileMenu">
+                HOME
+            </NavLink>
+            <NavLink href="work" Match="NavLinkMatch.Prefix" class="nav-link" @onclick="CloseMobileMenu">
+                WORK
+            </NavLink>
+            <NavLink href="architecture" Match="NavLinkMatch.Prefix" class="nav-link" @onclick="CloseMobileMenu">
+                ARCHITECTURE
+            </NavLink>
+            <a href="work#stack" class="nav-link" @onclick="CloseMobileMenu">
+                STACK
+            </a>
+            <a href="#about" class="nav-link" @onclick="CloseMobileMenu">
+                ABOUT
+            </a>
+        </nav>
+
+        <!-- Right Actions Group -->
+        <div class="header-right">
+            <!-- Status Badge -->
+            <div class="live-status-pill hidden-xs">
+                <span class="pulse-dot">
+                    <span class="ping"></span>
+                    <span class="dot"></span>
+                </span>
+                <span class="status-text">Available for roles</span>
+            </div>
+
+            <!-- Get in Touch / Contact CTA -->
+            <button class="btn btn-secondary btn-sm" @onclick="OpenContactModal">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>Inquire</span>
+            </button>
+
+            <!-- Resume CTA Button -->
+            <a class="btn btn-purple btn-sm" href="#resume" @onclick:preventDefault="true" @onclick="HandleResumeClick">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <span>Resume</span>
+            </a>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button class="mobile-toggle-btn" @onclick="ToggleMobileMenu" aria-label="Toggle navigation menu">
+                @if (IsMobileMenuOpen)
+                {
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                }
+                else
+                {
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                }
+            </button>
+        </div>
+    </div>
+</header>
+
+@code {
+    [Parameter]
+    public EventCallback OnOpenContact { get; set; }
+
+    [Parameter]
+    public EventCallback OnResumeRequested { get; set; }
+
+    private bool IsMobileMenuOpen { get; set; }
+
+    private void ToggleMobileMenu()
+    {
+        IsMobileMenuOpen = !IsMobileMenuOpen;
+    }
+
+    private void CloseMobileMenu()
+    {
+        IsMobileMenuOpen = false;
+    }
+
+    private async Task OpenContactModal()
+    {
+        CloseMobileMenu();
+        await OnOpenContact.InvokeAsync();
+    }
+
+    private async Task HandleResumeClick()
+    {
+        await OnResumeRequested.InvokeAsync();
+    }
+}

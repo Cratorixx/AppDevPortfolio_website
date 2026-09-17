@@ -1,0 +1,52 @@
+@inherits LayoutComponentBase
+
+<div class="layout-container hero-glow-bg">
+    <NavBar OnOpenContact="OpenContact" OnResumeRequested="HandleResumeRequest" />
+
+    <main class="main-content">
+        @Body
+    </main>
+
+    <Footer />
+
+    <ContactModal @bind-IsOpen="IsContactModalOpen" />
+
+    @if (ShowResumeToast)
+    {
+        <div class="toast-alert" @onclick="DismissToast">
+            <div class="toast-content">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="#34d399" stroke-width="2" fill="none">
+                    <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+                <div>
+                    <strong>Resume Download Initiated</strong>
+                    <div class="toast-sub">Generating verified PDF transcript for AK...</div>
+                </div>
+            </div>
+            <button class="toast-close" @onclick="DismissToast">×</button>
+        </div>
+    }
+</div>
+
+@code {
+    private bool IsContactModalOpen { get; set; }
+    private bool ShowResumeToast { get; set; }
+
+    private void OpenContact()
+    {
+        IsContactModalOpen = true;
+    }
+
+    private async Task HandleResumeRequest()
+    {
+        ShowResumeToast = true;
+        await Task.Delay(3500);
+        ShowResumeToast = false;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private void DismissToast()
+    {
+        ShowResumeToast = false;
+    }
+}

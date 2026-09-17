@@ -1,0 +1,83 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = App Dev
+build_property.RootNamespace = App Dev
+build_property.ProjectDir = C:\Users\L23Y16W12\Desktop\App Dev\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\L23Y16W12\Desktop\App Dev
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/Layout/Footer.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcRm9vdGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-z5m8jf1nmk
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-m81vmowihe
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/Layout/NavBar.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2QmFyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-dxegdh707j
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-67fjkzfk6x
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/Pages/Projects.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9qZWN0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-2z84zmml5y
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/Pages/SystemDesign.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTeXN0ZW1EZXNpZ24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-ga3s9r3bjr
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/Shared/ArchitectureDiagram.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcQXJjaGl0ZWN0dXJlRGlhZ3JhbS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-89h5rsxhng
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/Shared/ContactModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcQ29udGFjdE1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-1ahj2f5dbe
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/Shared/ProjectCard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcUHJvamVjdENhcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-8cqpcrflj8
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/Shared/ProjectHeroCard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcUHJvamVjdEhlcm9DYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-qrxjq4js4d
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/Shared/TaskSimulationPreview.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcVGFza1NpbXVsYXRpb25QcmV2aWV3LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-uzs2p32wte
+
+[C:/Users/L23Y16W12/Desktop/App Dev/Components/Shared/TerminalWindow.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcVGVybWluYWxXaW5kb3cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-01q1qexnqo

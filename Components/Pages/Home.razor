@@ -1,0 +1,82 @@
+@page "/"
+@page "/portfolio"
+@inject IPortfolioService PortfolioService
+
+<PageTitle>AK — Software Engineer Portfolio</PageTitle>
+
+<main class="container-max hero-main">
+    <div class="hero-grid">
+        <!-- Left Column: Bio, Headline, Actions & Metrics -->
+        <section class="hero-intro" data-purpose="hero-intro">
+            <!-- Top Badges / Version Tag -->
+            <div class="hero-badges font-mono-code">
+                <span class="badge badge-indigo">
+                    v2.4.1 — PORTFOLIO
+                </span>
+                <span class="badge badge-teal">
+                    SOFTWARE ENGINEER
+                </span>
+            </div>
+
+            <!-- Main Heading with luminous gradient -->
+            <h1 class="hero-title">
+                Crafting Scalable <br class="hidden-xs" />
+                <span class="text-gradient-purple-cyan">Systems &amp; Intuitive</span> <br />
+                <span class="text-gradient-blue">Interfaces</span>
+            </h1>
+
+            <!-- Subtitle / Bio Paragraph -->
+            <p class="hero-bio">
+                I build production-grade Android and backend systems with a sharp eye for UI precision. From concurrent job schedulers to pixel-perfect design systems — shipped, measured, iterated.
+            </p>
+
+            <!-- CTA Action Button Group -->
+            <div class="hero-actions">
+                <!-- Explore Work Button -->
+                <NavLink href="work" class="btn btn-primary group">
+                    <span>Explore Work</span>
+                    <span class="arrow-trans">→</span>
+                </NavLink>
+
+                <!-- View GitHub Button -->
+                <a class="btn btn-secondary" href="https://github.com" target="_blank" rel="noopener noreferrer">
+                    <svg aria-hidden="true" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                        <path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path>
+                    </svg>
+                    <span>View GitHub</span>
+                </a>
+            </div>
+
+            <!-- Divider line -->
+            <div class="divider-line"></div>
+
+            <!-- Metrics / Stats Grid -->
+            <div class="metrics-grid font-mono-code">
+                @if (HeroMetrics != null)
+                {
+                    @foreach (var metric in HeroMetrics)
+                    {
+                        <div class="metric-item">
+                            <div class="metric-val">@metric.Value</div>
+                            <div class="metric-lbl">@metric.Label</div>
+                        </div>
+                    }
+                }
+            </div>
+        </section>
+
+        <!-- Right Column: Interactive Code & Architecture Map Terminal Window -->
+        <section class="hero-terminal">
+            <TerminalWindow />
+        </section>
+    </div>
+</main>
+
+@code {
+    private IReadOnlyList<PortfolioMetric>? HeroMetrics { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        HeroMetrics = await PortfolioService.GetHeroMetricsAsync();
+    }
+}
