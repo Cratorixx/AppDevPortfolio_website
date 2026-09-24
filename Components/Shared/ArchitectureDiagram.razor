@@ -1,17 +1,21 @@
-<div class="diagram-wrapper" data-purpose="diagram-container">
+<div class="relative rounded-2xl bg-[#0d131f]/95 border border-slate-800 p-6 min-h-[500px] flex flex-col justify-between overflow-hidden shadow-2xl" data-purpose="diagram-container">
     <!-- Subtle Grid Background -->
-    <div class="bg-tech-grid grid-layer"></div>
+    <div class="absolute inset-0 bg-tech-grid opacity-75 pointer-events-none"></div>
 
-    <!-- Card Header -->
-    <div class="diagram-header">
-        <span class="diagram-title font-mono-code">ARCHITECTURE BLOCK DIAGRAM</span>
-        <span class="badge badge-cyan">INTERACTIVE</span>
+    <!-- Card Header inside Diagram Container -->
+    <div class="relative z-10 flex items-center justify-between mb-8">
+        <span class="font-mono text-xs font-semibold tracking-wider text-slate-400 uppercase">
+            ARCHITECTURE BLOCK DIAGRAM
+        </span>
+        <span class="px-2.5 py-0.5 rounded border border-cyan-500/40 bg-cyan-950/40 text-cyan-300 font-mono text-[11px] font-semibold uppercase tracking-wider">
+            INTERACTIVE
+        </span>
     </div>
 
     <!-- Interactive Node Diagram Flow Canvas with SVG Connections -->
-    <div class="diagram-canvas">
+    <div class="relative z-10 flex-1 flex flex-col justify-center px-2 py-4">
         <!-- SVG Dashed Connector Layer -->
-        <svg class="connections-layer" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 100 100">
+        <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <marker id="arrow-cyan" markerHeight="4" markerWidth="4" orient="auto-start-reverse" refX="5" refY="5" viewBox="0 0 10 10">
                     <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"></path>
@@ -25,74 +29,68 @@
             </defs>
 
             <!-- Top Row Horizontal: Android -> WebSocket Gateway -->
-            <line x1="28" y1="23" x2="38" y2="23" stroke="#64748b" stroke-width="0.8" stroke-dasharray="2,2" />
-            
+            <line stroke="#64748b" stroke-dasharray="4,4" stroke-width="1.5" x1="28%" x2="38%" y1="23%" y2="23%"></line>
             <!-- Top Row Horizontal: WebSocket -> Event Bus -->
-            <line x1="62" y1="23" x2="72" y2="23" stroke="#64748b" stroke-width="0.8" stroke-dasharray="2,2" />
-
+            <line stroke="#64748b" stroke-dasharray="4,4" stroke-width="1.5" x1="62%" x2="72%" y1="23%" y2="23%"></line>
             <!-- Vertical: Android Client down to Task Orchestrator -->
-            <line x1="18" y1="36" x2="18" y2="64" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="2,2" marker-end="url(#arrow-cyan)" />
-
+            <line marker-end="url(#arrow-cyan)" stroke="#38bdf8" stroke-dasharray="4,4" stroke-width="1.5" x1="18%" x2="18%" y1="36%" y2="64%"></line>
             <!-- Vertical: WebSocket Gateway down to Conflict Resolver -->
-            <line x1="50" y1="36" x2="50" y2="64" stroke="#64748b" stroke-width="0.8" stroke-dasharray="2,2" />
-
+            <line stroke="#64748b" stroke-dasharray="4,4" stroke-width="1.5" x1="50%" x2="50%" y1="36%" y2="64%"></line>
             <!-- Vertical: Event Bus down to Persistence Layer -->
-            <line x1="82" y1="36" x2="82" y2="64" stroke="#64748b" stroke-width="0.8" stroke-dasharray="2,2" />
-
+            <line stroke="#64748b" stroke-dasharray="4,4" stroke-width="1.5" x1="82%" x2="82%" y1="36%" y2="64%"></line>
             <!-- Bottom Row Horizontal: Task Orchestrator -> Conflict Resolver -->
-            <line x1="28" y1="78" x2="38" y2="78" stroke="#64748b" stroke-width="0.8" stroke-dasharray="2,2" />
-
+            <line stroke="#64748b" stroke-dasharray="4,4" stroke-width="1.5" x1="28%" x2="38%" y1="78%" y2="78%"></line>
             <!-- Bottom Row Horizontal: Conflict Resolver -> Persistence Layer -->
-            <line x1="62" y1="78" x2="72" y2="78" stroke="#64748b" stroke-width="0.8" stroke-dasharray="2,2" />
+            <line stroke="#64748b" stroke-dasharray="4,4" stroke-width="1.5" x1="62%" x2="72%" y1="78%" y2="78%"></line>
         </svg>
 
         <!-- Node Flow Elements: 2 Rows x 3 Columns -->
-        <div class="nodes-container">
+        <div class="relative z-10 flex flex-col gap-16 sm:gap-20">
             <!-- Top Row Nodes -->
-            <div class="nodes-row">
+            <div class="grid grid-cols-3 gap-2.5 sm:gap-4">
                 <!-- Node: Android Client -->
-                <div class="node-card node-purple @(SelectedNode?.Id == "android-client" ? "selected" : "")" 
+                <div class="rounded-lg p-2.5 sm:p-3 text-center transition-all duration-200 hover:scale-105 cursor-pointer backdrop-blur-sm border bg-[rgba(129,140,248,0.06)] border-[rgba(129,140,248,0.35)] @(SelectedNode?.Id == "android-client" ? "ring-2 ring-purple-400 border-purple-400 shadow-glow-purple" : "")"
                      @onclick="@(() => ToggleNode("android-client"))">
-                    <div class="node-main-title">Android Client</div>
-                    <div class="node-sub-title font-mono-code">MVVM + Compose</div>
+                    <div class="text-[11px] sm:text-xs font-semibold text-purple-300 tracking-tight truncate">Android Client</div>
+                    <div class="text-[9px] sm:text-[10px] font-mono text-purple-400/80 mt-1 truncate">MVVM + Compose</div>
                 </div>
 
                 <!-- Node: WebSocket Gateway -->
-                <div class="node-card node-cyan @(SelectedNode?.Id == "websocket-gateway" ? "selected" : "")" 
+                <div class="rounded-lg p-2.5 sm:p-3 text-center transition-all duration-200 hover:scale-105 cursor-pointer backdrop-blur-sm border bg-[rgba(56,189,248,0.06)] border-[rgba(56,189,248,0.35)] @(SelectedNode?.Id == "websocket-gateway" ? "ring-2 ring-cyan-400 border-cyan-400 shadow-glow-cyan" : "")"
                      @onclick="@(() => ToggleNode("websocket-gateway"))">
-                    <div class="node-main-title">WebSocket Gateway</div>
-                    <div class="node-sub-title font-mono-code">Netty NIO</div>
+                    <div class="text-[11px] sm:text-xs font-semibold text-cyan-300 tracking-tight truncate">WebSocket Gateway</div>
+                    <div class="text-[9px] sm:text-[10px] font-mono text-cyan-400/80 mt-1 truncate">Netty NIO</div>
                 </div>
 
                 <!-- Node: Event Bus -->
-                <div class="node-card node-emerald @(SelectedNode?.Id == "event-bus" ? "selected" : "")" 
+                <div class="rounded-lg p-2.5 sm:p-3 text-center transition-all duration-200 hover:scale-105 cursor-pointer backdrop-blur-sm border bg-[rgba(52,211,153,0.06)] border-[rgba(52,211,153,0.35)] @(SelectedNode?.Id == "event-bus" ? "ring-2 ring-emerald-400 border-emerald-400" : "")"
                      @onclick="@(() => ToggleNode("event-bus"))">
-                    <div class="node-main-title">Event Bus</div>
-                    <div class="node-sub-title font-mono-code">Kafka Streams</div>
+                    <div class="text-[11px] sm:text-xs font-semibold text-emerald-300 tracking-tight truncate">Event Bus</div>
+                    <div class="text-[9px] sm:text-[10px] font-mono text-emerald-400/80 mt-1 truncate">Kafka Streams</div>
                 </div>
             </div>
 
             <!-- Bottom Row Nodes -->
-            <div class="nodes-row">
+            <div class="grid grid-cols-3 gap-2.5 sm:gap-4">
                 <!-- Node: Task Orchestrator -->
-                <div class="node-card node-purple @(SelectedNode?.Id == "task-orchestrator" ? "selected" : "")" 
+                <div class="rounded-lg p-2.5 sm:p-3 text-center transition-all duration-200 hover:scale-105 cursor-pointer backdrop-blur-sm border bg-[rgba(129,140,248,0.06)] border-[rgba(129,140,248,0.35)] @(SelectedNode?.Id == "task-orchestrator" ? "ring-2 ring-purple-400 border-purple-400 shadow-glow-purple" : "")"
                      @onclick="@(() => ToggleNode("task-orchestrator"))">
-                    <div class="node-main-title">Task Orchestrator</div>
-                    <div class="node-sub-title font-mono-code">Spring Boot</div>
+                    <div class="text-[11px] sm:text-xs font-semibold text-purple-300 tracking-tight truncate">Task Orchestrator</div>
+                    <div class="text-[9px] sm:text-[10px] font-mono text-purple-400/80 mt-1 truncate">Spring Boot</div>
                 </div>
 
                 <!-- Node: Conflict Resolver -->
-                <div class="node-card node-amber @(SelectedNode?.Id == "conflict-resolver" ? "selected" : "")" 
+                <div class="rounded-lg p-2.5 sm:p-3 text-center transition-all duration-200 hover:scale-105 cursor-pointer backdrop-blur-sm border bg-[rgba(251,146,60,0.06)] border-[rgba(251,146,60,0.35)] @(SelectedNode?.Id == "conflict-resolver" ? "ring-2 ring-amber-400 border-amber-400" : "")"
                      @onclick="@(() => ToggleNode("conflict-resolver"))">
-                    <div class="node-main-title">Conflict Resolver</div>
-                    <div class="node-sub-title font-mono-code">Vector Clocks</div>
+                    <div class="text-[11px] sm:text-xs font-semibold text-amber-300 tracking-tight truncate">Conflict Resolver</div>
+                    <div class="text-[9px] sm:text-[10px] font-mono text-amber-400/80 mt-1 truncate">Vector Clocks</div>
                 </div>
 
                 <!-- Node: Persistence Layer -->
-                <div class="node-card node-teal @(SelectedNode?.Id == "persistence-layer" ? "selected" : "")" 
+                <div class="rounded-lg p-2.5 sm:p-3 text-center transition-all duration-200 hover:scale-105 cursor-pointer backdrop-blur-sm border bg-[rgba(45,212,191,0.06)] border-[rgba(45,212,191,0.35)] @(SelectedNode?.Id == "persistence-layer" ? "ring-2 ring-teal-400 border-teal-400" : "")"
                      @onclick="@(() => ToggleNode("persistence-layer"))">
-                    <div class="node-main-title">Persistence Layer</div>
-                    <div class="node-sub-title font-mono-code">PostgreSQL + Redis</div>
+                    <div class="text-[11px] sm:text-xs font-semibold text-teal-300 tracking-tight truncate">Persistence Layer</div>
+                    <div class="text-[9px] sm:text-[10px] font-mono text-teal-400/80 mt-1 truncate">PostgreSQL + Redis</div>
                 </div>
             </div>
         </div>
@@ -101,43 +99,43 @@
     <!-- Interactive Node Inspector Drawer -->
     @if (SelectedNode != null)
     {
-        <div class="node-inspector">
-            <div class="inspector-header">
-                <div class="inspector-badge-row font-mono-code">
-                    <span class="badge badge-@SelectedNode.ThemeColor">NODE SPECIFICATION</span>
-                    <span class="inspector-throughput">@SelectedNode.Throughput</span>
+        <div class="relative z-10 mt-6 bg-[#070a12] border border-cyan-500/40 rounded-xl p-4 shadow-xl">
+            <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-3 font-mono">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-cyan-950/60 text-cyan-300 border border-cyan-500/30 uppercase">NODE SPECIFICATION</span>
+                    <span class="text-xs text-cyan-400">@SelectedNode.Throughput</span>
                 </div>
-                <button class="inspector-close" @onclick="@(() => SelectedNode = null)">×</button>
+                <button type="button" class="text-slate-400 hover:text-white text-base leading-none" @onclick="@(() => SelectedNode = null)">×</button>
             </div>
-            <h4 class="inspector-title font-mono-code">@SelectedNode.Name <span class="inspector-sub">(@SelectedNode.Subtitle)</span></h4>
-            <p class="inspector-desc">@SelectedNode.Description</p>
+            <h4 class="text-sm font-bold text-white font-mono mb-1">@SelectedNode.Name <span class="font-normal text-indigo-300 text-xs">(@SelectedNode.Subtitle)</span></h4>
+            <p class="text-xs text-slate-400 leading-relaxed mb-3">@SelectedNode.Description</p>
             
-            <div class="inspector-grid font-mono-code">
-                <div class="inspector-item">
-                    <span class="item-label">TECHNOLOGY:</span>
-                    <span class="item-val">@SelectedNode.TechStack</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-mono">
+                <div class="flex flex-col">
+                    <span class="text-slate-500 font-semibold">TECH STACK:</span>
+                    <span class="text-slate-200">@SelectedNode.TechStack</span>
                 </div>
-                <div class="inspector-item">
-                    <span class="item-label">PROTOCOL:</span>
-                    <span class="item-val">@SelectedNode.Protocol</span>
+                <div class="flex flex-col">
+                    <span class="text-slate-500 font-semibold">PROTOCOL:</span>
+                    <span class="text-slate-200">@SelectedNode.Protocol</span>
                 </div>
-                <div class="inspector-item full-width">
-                    <span class="item-label">FAILURE MODE:</span>
-                    <span class="item-val text-amber">@SelectedNode.FailureMode</span>
+                <div class="flex flex-col sm:col-span-2 mt-1">
+                    <span class="text-slate-500 font-semibold">FAILURE MODE:</span>
+                    <span class="text-amber-300">@SelectedNode.FailureMode</span>
                 </div>
             </div>
         </div>
     }
     else
     {
-        <div class="hint-message font-mono-code">
+        <div class="relative z-10 text-center text-[11px] font-mono text-slate-500 mt-4">
             <span>Tip: Click any architecture node above to inspect runtime specs and protocols</span>
         </div>
     }
 
     <!-- Bottom subtle indicator inside card -->
-    <div class="diagram-footer">
-        <span class="overview-tag font-mono-code">• SYSTEM OVERVIEW •</span>
+    <div class="relative z-10 pt-4 flex justify-center">
+        <span class="text-[10px] font-mono tracking-widest text-slate-600 uppercase">• SYSTEM OVERVIEW •</span>
     </div>
 </div>
 

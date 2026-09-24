@@ -1,70 +1,70 @@
-<header class="site-header" data-purpose="site-header">
-    <div class="container-max header-inner">
+<header class="w-full border-b border-white/[0.06] bg-[#07080e]/85 backdrop-blur-md sticky top-0 z-50 transition-all duration-200" data-purpose="site-header">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-16 sm:h-20 flex items-center justify-between gap-6">
         <!-- Left Monogram Avatar -->
-        <div class="header-left">
-            <NavLink href="" class="monogram-avatar" Match="NavLinkMatch.All" aria-label="Home">
+        <div class="flex items-center space-x-3">
+            <NavLink href="" Match="NavLinkMatch.All" class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-sky-500 flex items-center justify-center text-white font-bold text-sm tracking-wider shadow-lg shadow-purple-900/30 ring-1 ring-white/20 hover:scale-105 hover:opacity-95 transition-all duration-200" aria-label="Home">
                 AK
             </NavLink>
         </div>
 
         <!-- Center Navigation Links -->
-        <nav class="main-nav @(IsMobileMenuOpen ? "mobile-open" : "")" aria-label="Main Navigation">
-            <NavLink href="" Match="NavLinkMatch.All" class="nav-link" @onclick="CloseMobileMenu">
+        <nav aria-label="Main Navigation" class="hidden md:flex items-center space-x-8 text-xs font-mono font-semibold tracking-widest text-slate-400">
+            <NavLink href="" Match="NavLinkMatch.All" class="hover:text-white transition-colors duration-150 relative py-1" ActiveClass="text-white after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:right-0 after:h-[2px] after:bg-gradient-to-r after:from-purple-500 after:to-cyan-400 after:rounded-full">
                 HOME
             </NavLink>
-            <NavLink href="work" Match="NavLinkMatch.Prefix" class="nav-link" @onclick="CloseMobileMenu">
+            <NavLink href="work" Match="NavLinkMatch.Prefix" class="hover:text-white transition-colors duration-150 relative py-1" ActiveClass="text-white after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:right-0 after:h-[2px] after:bg-gradient-to-r after:from-purple-500 after:to-cyan-400 after:rounded-full">
                 WORK
             </NavLink>
-            <NavLink href="architecture" Match="NavLinkMatch.Prefix" class="nav-link" @onclick="CloseMobileMenu">
+            <NavLink href="architecture" Match="NavLinkMatch.Prefix" class="hover:text-white transition-colors duration-150 relative py-1" ActiveClass="text-white after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:right-0 after:h-[2px] after:bg-gradient-to-r after:from-purple-500 after:to-cyan-400 after:rounded-full">
                 ARCHITECTURE
             </NavLink>
-            <a href="work#stack" class="nav-link" @onclick="CloseMobileMenu">
+            <a href="work#stack" class="hover:text-white transition-colors duration-150 relative py-1">
                 STACK
             </a>
-            <a href="#about" class="nav-link" @onclick="CloseMobileMenu">
+            <a href="#about" class="hover:text-white transition-colors duration-150 relative py-1">
                 ABOUT
             </a>
         </nav>
 
         <!-- Right Actions Group -->
-        <div class="header-right">
+        <div class="flex items-center space-x-2.5 sm:space-x-3.5">
             <!-- Status Badge -->
-            <div class="live-status-pill hidden-xs">
-                <span class="pulse-dot">
-                    <span class="ping"></span>
-                    <span class="dot"></span>
+            <div class="hidden sm:flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs font-medium backdrop-blur-md">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span class="status-text">Available for roles</span>
+                <span class="tracking-wide text-[11px] font-mono">Available for roles</span>
             </div>
 
-            <!-- Get in Touch / Contact CTA -->
-            <button class="btn btn-secondary btn-sm" @onclick="OpenContactModal">
-                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none">
+            <!-- Inquire CTA -->
+            <button type="button" @onclick="OpenContactModal" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#0e111a] hover:bg-[#161a27] text-slate-300 hover:text-white border border-slate-800 text-xs font-mono font-medium tracking-wide transition-all duration-200">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                 </svg>
                 <span>Inquire</span>
             </button>
 
             <!-- Resume CTA Button -->
-            <a class="btn btn-purple btn-sm" href="#resume" @onclick:preventDefault="true" @onclick="HandleResumeClick">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5">
+            <button type="button" @onclick="HandleResumeClick" class="inline-flex items-center space-x-2 px-3.5 sm:px-4 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold shadow-glow-purple border border-purple-400/30 transition-all duration-200">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
                 <span>Resume</span>
-            </a>
+            </button>
 
-            <!-- Mobile Menu Toggle Button -->
-            <button class="mobile-toggle-btn" @onclick="ToggleMobileMenu" aria-label="Toggle navigation menu">
+            <!-- Mobile Toggle -->
+            <button type="button" @onclick="ToggleMobileMenu" class="md:hidden inline-flex items-center justify-center p-2 rounded-lg bg-[#0e111a] text-slate-400 hover:text-white border border-slate-800" aria-label="Toggle navigation menu">
                 @if (IsMobileMenuOpen)
                 {
-                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
                 }
                 else
                 {
-                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
                         <line x1="3" y1="12" x2="21" y2="12"></line>
                         <line x1="3" y1="6" x2="21" y2="6"></line>
                         <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -73,6 +73,28 @@
             </button>
         </div>
     </div>
+
+    <!-- Mobile Dropdown Nav -->
+    @if (IsMobileMenuOpen)
+    {
+        <div class="md:hidden border-t border-white/[0.08] bg-[#0b0e17] px-6 py-4 flex flex-col space-y-3 font-mono text-xs">
+            <NavLink href="" Match="NavLinkMatch.All" class="text-slate-300 hover:text-white py-1" @onclick="CloseMobileMenu">
+                HOME
+            </NavLink>
+            <NavLink href="work" Match="NavLinkMatch.Prefix" class="text-slate-300 hover:text-white py-1" @onclick="CloseMobileMenu">
+                WORK
+            </NavLink>
+            <NavLink href="architecture" Match="NavLinkMatch.Prefix" class="text-slate-300 hover:text-white py-1" @onclick="CloseMobileMenu">
+                ARCHITECTURE
+            </NavLink>
+            <a href="work#stack" class="text-slate-300 hover:text-white py-1" @onclick="CloseMobileMenu">
+                STACK
+            </a>
+            <a href="#about" class="text-slate-300 hover:text-white py-1" @onclick="CloseMobileMenu">
+                ABOUT
+            </a>
+        </div>
+    }
 </header>
 
 @code {

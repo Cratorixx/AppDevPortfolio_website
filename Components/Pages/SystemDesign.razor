@@ -4,55 +4,59 @@
 
 <PageTitle>FlowTrack: System Design Deep Dive</PageTitle>
 
-<main class="container-max arch-main">
-    <!-- Title Section -->
-    <section class="arch-title-section" data-purpose="page-title-section">
-        <div class="case-study-pill font-mono-code">
+<main class="w-full max-w-7xl mx-auto px-6 pt-4 pb-20">
+    <!-- Section Title & Tag Header -->
+    <section class="mb-10" data-purpose="page-title-section">
+        <!-- Monospace Case Study Pill -->
+        <div class="inline-block mb-3 px-2.5 py-0.5 rounded border border-cyan-500/30 bg-cyan-950/20 text-cyan-400 font-mono text-[11px] tracking-wider uppercase">
             @(CaseStudy?.Subtitle ?? "03 · SYSTEM CASE STUDY")
         </div>
-        <h1 class="arch-page-title">
+        <!-- Primary Headline -->
+        <h1 class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-tight">
             @(CaseStudy?.Title ?? "FlowTrack: System Design Deep Dive")
         </h1>
     </section>
 
     <!-- Grid Container: Two main columns (Left details, Right architecture diagram) -->
-    <div class="arch-grid">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         <!-- Left Column: Problem, Solution, Data Structures, Hurdles, Metrics -->
-        <div class="arch-left-col">
+        <div class="lg:col-span-6 flex flex-col gap-4">
             <!-- Card 1: PROBLEM -->
-            <div class="detail-card" data-purpose="problem-card">
-                <div class="card-status-header text-rose font-mono-code">
-                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+            <div class="p-5 rounded-xl bg-[#101622]/90 border border-slate-800/80 shadow-sm" data-purpose="problem-card">
+                <div class="flex items-center gap-2 mb-2 text-rose-500 font-mono text-xs font-bold tracking-wider">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                         <path d="M12 3l10 18H2L12 3z"></path>
                     </svg>
                     <span>PROBLEM</span>
                 </div>
-                <p class="detail-card-text">
+                <p class="text-[13.5px] leading-relaxed text-slate-300 font-normal">
                     @(CaseStudy?.Problem ?? "Teams needed real-time task sync across unstable mobile connections without data loss or conflicts.")
                 </p>
             </div>
 
             <!-- Card 2: SOLUTION -->
-            <div class="detail-card" data-purpose="solution-card">
-                <div class="card-status-header text-emerald font-mono-code">
-                    <span class="dot-emerald-static"></span>
+            <div class="p-5 rounded-xl bg-[#101622]/90 border border-slate-800/80 shadow-sm" data-purpose="solution-card">
+                <div class="flex items-center gap-2 mb-2 text-emerald-400 font-mono text-xs font-bold tracking-wider">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
                     <span>SOLUTION</span>
                 </div>
-                <p class="detail-card-text">
+                <p class="text-[13.5px] leading-relaxed text-slate-300 font-normal">
                     @(CaseStudy?.Solution ?? "Event-sourced state with vector clocks for conflict detection; optimistic UI updates reverted on conflict; WebSocket with HTTP/2 fallback.")
                 </p>
             </div>
 
             <!-- Card 3: DATA STRUCTURES USED -->
-            <div class="detail-card" data-purpose="data-structures-card">
-                <h2 class="section-sub-title font-mono-code">DATA STRUCTURES USED</h2>
-                <ul class="data-structures-list">
+            <div class="p-5 rounded-xl bg-[#101622]/90 border border-slate-800/80 shadow-sm" data-purpose="data-structures-card">
+                <h2 class="text-xs font-mono font-semibold tracking-wider text-slate-400 uppercase mb-3.5">
+                    DATA STRUCTURES USED
+                </h2>
+                <ul class="space-y-2 text-[13.5px] text-slate-300">
                     @if (CaseStudy?.DataStructures != null)
                     {
                         @foreach (var ds in CaseStudy.DataStructures)
                         {
-                            <li class="ds-item">
-                                <span class="cyan-bullet"></span>
+                            <li class="flex items-center gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"></span>
                                 <span>@ds</span>
                             </li>
                         }
@@ -61,18 +65,22 @@
             </div>
 
             <!-- Card 4: TECHNICAL HURDLES OVERCOME -->
-            <div class="detail-card" data-purpose="hurdles-card">
-                <h2 class="section-sub-title font-mono-code">TECHNICAL HURDLES OVERCOME</h2>
-                <div class="hurdles-list">
+            <div class="p-5 rounded-xl bg-[#101622]/90 border border-slate-800/80 shadow-sm" data-purpose="hurdles-card">
+                <h2 class="text-xs font-mono font-semibold tracking-wider text-slate-400 uppercase mb-4">
+                    TECHNICAL HURDLES OVERCOME
+                </h2>
+                <div class="space-y-3.5">
                     @if (CaseStudy?.TechnicalHurdles != null)
                     {
                         @foreach (var hurdle in CaseStudy.TechnicalHurdles)
                         {
-                            <div class="hurdle-item">
-                                <span class="hurdle-num font-mono-code">@hurdle.Number</span>
-                                <div class="hurdle-content">
-                                    <h3 class="hurdle-title">@hurdle.Title</h3>
-                                    <p class="hurdle-desc">@hurdle.Description</p>
+                            <div class="flex items-start gap-3">
+                                <span class="px-2 py-0.5 rounded bg-slate-800/80 border border-slate-700/60 text-slate-400 font-mono text-[11px] font-semibold mt-0.5">
+                                    @hurdle.Number
+                                </span>
+                                <div>
+                                    <h3 class="text-[13px] font-semibold text-white tracking-tight">@hurdle.Title</h3>
+                                    <p class="text-xs text-slate-400 mt-0.5">@hurdle.Description</p>
                                 </div>
                             </div>
                         }
@@ -81,20 +89,20 @@
             </div>
 
             <!-- Card 5: Bottom Mini Metrics Row -->
-            <div class="mini-metrics-row" data-purpose="metrics-preview">
-                <div class="mini-metric-card">
-                    <span class="mini-metric-val">@(CaseStudy?.CrashFreeRate ?? "98.3%")</span>
-                    <span class="mini-metric-lbl">crash-free</span>
+            <div class="grid grid-cols-2 gap-4 pt-1" data-purpose="metrics-preview">
+                <div class="p-3.5 rounded-xl bg-[#101622]/90 border border-slate-800/80 flex items-center gap-2">
+                    <span class="text-white font-bold text-sm tracking-tight">@(CaseStudy?.CrashFreeRate ?? "98.3%")</span>
+                    <span class="text-slate-400 text-xs">crash-free</span>
                 </div>
-                <div class="mini-metric-card">
-                    <span class="mini-metric-val">@(CaseStudy?.StoreRating ?? "4.6★")</span>
-                    <span class="mini-metric-lbl">Play Store</span>
+                <div class="p-3.5 rounded-xl bg-[#101622]/90 border border-slate-800/80 flex items-center gap-1.5">
+                    <span class="text-white font-bold text-sm tracking-tight">@(CaseStudy?.StoreRating ?? "4.6★")</span>
+                    <span class="text-slate-400 text-xs">Play Store</span>
                 </div>
             </div>
         </div>
 
         <!-- Right Column: Architecture Diagram -->
-        <div class="arch-right-col">
+        <div class="lg:col-span-6 w-full">
             <ArchitectureDiagram Nodes="CaseStudy?.Nodes" />
         </div>
     </div>

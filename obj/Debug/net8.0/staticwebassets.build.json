@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3uXztPRnNaPX9HIvYRYRdd5hE3IIxQ3GZf9yCEcItyE=",
+  "Hash": "ls80Y5tT+R4QOXZCC2bNuA6vYqSWM+kdSAcf/Z6Rj4o=",
   "Source": "App_Dev",
   "BasePath": "_content/App_Dev",
   "Mode": "Default",
@@ -16,44 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "C:\\Users\\L23Y16W12\\Desktop\\App Dev\\obj\\Debug\\net8.0\\scopedcss\\bundle\\App_Dev.styles.css",
-      "SourceId": "App_Dev",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\L23Y16W12\\Desktop\\App Dev\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
-      "BasePath": "_content/App_Dev",
-      "RelativePath": "App_Dev.styles.css",
-      "AssetKind": "All",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ApplicationBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\L23Y16W12\\Desktop\\App Dev\\obj\\Debug\\net8.0\\scopedcss\\bundle\\App_Dev.styles.css"
-    },
-    {
-      "Identity": "C:\\Users\\L23Y16W12\\Desktop\\App Dev\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\App_Dev.bundle.scp.css",
-      "SourceId": "App_Dev",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\L23Y16W12\\Desktop\\App Dev\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
-      "BasePath": "_content/App_Dev",
-      "RelativePath": "App_Dev.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\L23Y16W12\\Desktop\\App Dev\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\App_Dev.bundle.scp.css"
-    },
     {
       "Identity": "C:\\Users\\L23Y16W12\\Desktop\\App Dev\\wwwroot\\app.css",
       "SourceId": "App_Dev",
@@ -110,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Identity": "C:\\Users\\L23Y16W12\\Desktop\\App Dev\\wwwroot\\css\\tailwind.output.css",
+      "SourceId": "App_Dev",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\L23Y16W12\\Desktop\\App Dev\\wwwroot\\",
+      "BasePath": "_content/App_Dev",
+      "RelativePath": "css/tailwind.output.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\tailwind.output.css"
     },
     {
       "Identity": "C:\\Users\\L23Y16W12\\Desktop\\App Dev\\wwwroot\\favicon.png",

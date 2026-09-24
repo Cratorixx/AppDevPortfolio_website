@@ -4,37 +4,37 @@
 
 <PageTitle>Projects &amp; Case Studies Portfolio</PageTitle>
 
-<main class="container-max projects-main">
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
     <!-- Section Header & Filter Tabs -->
-    <section aria-label="Section Header" class="projects-header-section">
+    <section aria-label="Section Header" class="mb-10">
         <!-- Monospace Pill Badge -->
-        <div class="header-badge badge-glow font-mono-code">
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded border border-purple-500/40 bg-purple-950/30 text-purple-300 font-mono text-[11px] font-medium tracking-wide mb-4 shadow-badge-glow">
             <span>02</span>
-            <span class="badge-dot">•</span>
+            <span class="text-purple-400/60">•</span>
             <span>SELECTED WORK</span>
         </div>
 
         <!-- Main Title & Filters Row -->
-        <div class="title-filters-row">
-            <h1 class="page-title">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+            <h1 class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-white tracking-tight leading-tight">
                 Projects &amp; <span class="glow-cyan-text">Case Studies</span>
             </h1>
 
             <!-- Category Filters -->
-            <div class="filter-tabs-bar custom-scrollbar font-mono-code">
-                <button class="filter-tab @(SelectedCategory == ProjectCategory.All ? "filter-active" : "")"
+            <div class="flex items-center gap-1.5 p-1 rounded-xl bg-[#0e1422]/90 border border-white/[0.08] text-xs font-medium text-slate-400 self-start lg:self-auto overflow-x-auto max-w-full custom-scrollbar">
+                <button type="button" class="px-3.5 py-1.5 rounded-lg font-medium transition-all duration-150 @(SelectedCategory == ProjectCategory.All ? "bg-[#5b21b6] text-white shadow-sm" : "hover:text-slate-200")"
                         @onclick="@(() => SetCategory(ProjectCategory.All))">
                     All
                 </button>
-                <button class="filter-tab @(SelectedCategory == ProjectCategory.MobileApps ? "filter-active" : "")"
+                <button type="button" class="px-3.5 py-1.5 rounded-lg whitespace-nowrap font-medium transition-all duration-150 @(SelectedCategory == ProjectCategory.MobileApps ? "bg-[#5b21b6] text-white shadow-sm" : "hover:text-slate-200")"
                         @onclick="@(() => SetCategory(ProjectCategory.MobileApps))">
                     Mobile Apps
                 </button>
-                <button class="filter-tab @(SelectedCategory == ProjectCategory.BackendConcurrency ? "filter-active" : "")"
+                <button type="button" class="px-3.5 py-1.5 rounded-lg whitespace-nowrap font-medium transition-all duration-150 @(SelectedCategory == ProjectCategory.BackendConcurrency ? "bg-[#5b21b6] text-white shadow-sm" : "hover:text-slate-200")"
                         @onclick="@(() => SetCategory(ProjectCategory.BackendConcurrency))">
                     Backend &amp; Concurrency
                 </button>
-                <button class="filter-tab @(SelectedCategory == ProjectCategory.UIUX ? "filter-active" : "")"
+                <button type="button" class="px-3.5 py-1.5 rounded-lg whitespace-nowrap font-medium transition-all duration-150 @(SelectedCategory == ProjectCategory.UIUX ? "bg-[#5b21b6] text-white shadow-sm" : "hover:text-slate-200")"
                         @onclick="@(() => SetCategory(ProjectCategory.UIUX))">
                     UI/UX
                 </button>
@@ -49,7 +49,7 @@
     }
 
     <!-- BEGIN: Secondary Project Cards Grid -->
-    <section aria-label="Additional Projects" class="secondary-projects-grid">
+    <section aria-label="Additional Projects" class="grid grid-cols-1 md:grid-cols-2 gap-6">
         @if (SecondaryProjects != null)
         {
             @foreach (var project in SecondaryProjects)
@@ -61,9 +61,11 @@
 
     @if (SecondaryProjects?.Count == 0 && (FeaturedProject == null || (SelectedCategory != ProjectCategory.All && SelectedCategory != ProjectCategory.MobileApps)))
     {
-        <div class="empty-state font-mono-code">
-            <p>No projects match the selected filter category.</p>
-            <button class="btn btn-secondary mt-3" @onclick="@(() => SetCategory(ProjectCategory.All))">Reset Filters</button>
+        <div class="text-center py-16 px-4 font-mono text-sm text-slate-500">
+            <p>No projects match the selected category filter.</p>
+            <button type="button" class="mt-4 px-4 py-2 rounded-lg bg-[#0e1422] border border-white/10 text-slate-300 hover:text-white text-xs transition" @onclick="@(() => SetCategory(ProjectCategory.All))">
+                Reset Filters
+            </button>
         </div>
     }
 </main>

@@ -1,33 +1,33 @@
 @inject IPortfolioService PortfolioService
 
-<div class="sim-wrapper">
-    <div class="sim-card">
+<div class="flex justify-center w-full">
+    <div class="w-full max-w-sm rounded-xl border border-white/10 bg-[#090d16] p-4 sm:p-5 shadow-2xl relative">
         <!-- Terminal/App Status Header -->
-        <div class="sim-header font-mono-code">
-            <div class="sim-title-group">
-                <span class="status-pulse-dot"></span>
-                <span class="sim-title">FLOWTRACK V2.1.0</span>
+        <div class="flex items-center justify-between mb-4 text-[11px] font-mono tracking-wider text-slate-400">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                <span class="font-semibold text-slate-300">FLOWTRACK V2.1.0</span>
             </div>
-            <button class="sim-refresh-btn" @onclick="AdvanceAllTasks" title="Simulate real-time task progression">
+            <button type="button" @onclick="AdvanceAllTasks" class="text-[10px] text-slate-500 hover:text-cyan-400 bg-white/5 hover:bg-white/10 px-2 py-0.5 rounded border border-white/10 transition-colors" title="Simulate real-time task progression">
                 ↻ Tick
             </button>
         </div>
 
         <!-- Task List Component -->
-        <div class="task-list">
+        <div class="space-y-2.5">
             @if (Tasks != null)
             {
                 @foreach (var task in Tasks)
                 {
-                    <div class="task-item @(ActiveUpdatingTaskId == task.Id ? "task-updating" : "")" 
+                    <div class="flex items-center justify-between p-2.5 rounded-lg bg-[#0e1422] border border-white/[0.05] hover:border-purple-500/30 text-xs font-mono cursor-pointer transition-all duration-200 @(ActiveUpdatingTaskId == task.Id ? "scale-[0.98] border-cyan-400/50" : "")" 
                          @onclick="@(() => OnTaskClicked(task.Id))"
                          title="Click to advance task state">
-                        <div class="task-meta font-mono-code">
-                            <span class="dot dot-@task.ColorTheme"></span>
-                            <span class="task-label">@task.Title</span>
+                        <div class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full @GetDotColorClass(task.ColorTheme)"></span>
+                            <span class="text-slate-300">@task.Title</span>
                         </div>
-                        <div class="progress-track">
-                            <div class="progress-bar progress-@task.ColorTheme" style="width: @(task.ProgressPercent)%"></div>
+                        <div class="w-14 h-1.5 bg-slate-800 rounded-full overflow-hidden shrink-0">
+                            <div class="h-full rounded-full transition-all duration-300 @GetProgressColorClass(task.ColorTheme)" style="width: @(task.ProgressPercent)%"></div>
                         </div>
                     </div>
                 }
@@ -63,4 +63,24 @@
         }
         Tasks = await PortfolioService.GetSimulationTasksAsync();
     }
+
+    private string GetDotColorClass(string theme) => theme switch
+    {
+        "emerald" => "bg-emerald-400",
+        "amber" => "bg-amber-400",
+        "cyan" => "bg-cyan-400",
+        "purple" => "bg-purple-400",
+        "teal" => "bg-teal-400",
+        _ => "bg-cyan-400"
+    };
+
+    private string GetProgressColorClass(string theme) => theme switch
+    {
+        "emerald" => "bg-emerald-400",
+        "amber" => "bg-amber-400",
+        "cyan" => "bg-cyan-400",
+        "purple" => "bg-purple-500",
+        "teal" => "bg-teal-400",
+        _ => "bg-cyan-400"
+    };
 }

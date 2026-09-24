@@ -4,72 +4,72 @@
 
 <PageTitle>AK — Software Engineer Portfolio</PageTitle>
 
-<main class="container-max hero-main">
-    <div class="hero-grid">
-        <!-- Left Column: Bio, Headline, Actions & Metrics -->
-        <section class="hero-intro" data-purpose="hero-intro">
-            <!-- Top Badges / Version Tag -->
-            <div class="hero-badges font-mono-code">
-                <span class="badge badge-indigo">
-                    v2.4.1 — PORTFOLIO
-                </span>
-                <span class="badge badge-teal">
-                    SOFTWARE ENGINEER
-                </span>
-            </div>
+<main class="w-full max-w-7xl mx-auto px-6 lg:px-10 pt-8 pb-16 lg:py-14 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+    <!-- Left Column: Bio, Headline, Actions & Metrics -->
+    <section class="lg:col-span-6 flex flex-col justify-center space-y-7" data-purpose="hero-intro">
+        <!-- Top Badges / Version Tag -->
+        <div class="flex flex-wrap items-center gap-2 text-[11px] font-mono tracking-wider font-semibold">
+            <span class="px-2.5 py-1 rounded bg-[#131726]/80 text-[#818cf8] border border-[#373b56] tracking-wide">
+                v2.4.1 — PORTFOLIO
+            </span>
+            <span class="px-2.5 py-1 rounded bg-[#0f242c]/70 text-[#2dd4bf] border border-[#1d4c55] tracking-wide">
+                SOFTWARE ENGINEER
+            </span>
+        </div>
 
-            <!-- Main Heading with luminous gradient -->
-            <h1 class="hero-title">
-                Crafting Scalable <br class="hidden-xs" />
-                <span class="text-gradient-purple-cyan">Systems &amp; Intuitive</span> <br />
-                <span class="text-gradient-blue">Interfaces</span>
-            </h1>
+        <!-- Main Heading with luminous gradient -->
+        <h1 class="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-white leading-[1.12]">
+            Crafting Scalable <br class="hidden sm:inline" />
+            <span class="text-gradient-purple-cyan">Systems &amp; Intuitive</span> <br />
+            <span class="text-gradient-blue">Interfaces</span>
+        </h1>
 
-            <!-- Subtitle / Bio Paragraph -->
-            <p class="hero-bio">
-                I build production-grade Android and backend systems with a sharp eye for UI precision. From concurrent job schedulers to pixel-perfect design systems — shipped, measured, iterated.
-            </p>
+        <!-- Subtitle / Bio Paragraph -->
+        <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-xl">
+            I build production-grade Android and backend systems with a sharp eye for UI precision. From concurrent job schedulers to pixel-perfect design systems — shipped, measured, iterated.
+        </p>
 
-            <!-- CTA Action Button Group -->
-            <div class="hero-actions">
-                <!-- Explore Work Button -->
-                <NavLink href="work" class="btn btn-primary group">
-                    <span>Explore Work</span>
-                    <span class="arrow-trans">→</span>
-                </NavLink>
+        <!-- CTA Action Button Group -->
+        <div class="flex flex-wrap items-center gap-4 pt-1">
+            <!-- Explore Work Button -->
+            <NavLink href="work" class="inline-flex items-center space-x-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold shadow-glow-purple tracking-wide transition-all duration-200 group">
+                <span>Explore Work</span>
+                <span class="transition-transform group-hover:translate-x-1">→</span>
+            </NavLink>
 
-                <!-- View GitHub Button -->
-                <a class="btn btn-secondary" href="https://github.com" target="_blank" rel="noopener noreferrer">
-                    <svg aria-hidden="true" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                        <path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path>
-                    </svg>
-                    <span>View GitHub</span>
-                </a>
-            </div>
+            <!-- View GitHub Button -->
+            <a class="inline-flex items-center space-x-2.5 px-5 py-3 rounded-lg bg-[#0e111a] hover:bg-[#161a27] text-slate-300 hover:text-white border border-slate-800 text-xs font-medium tracking-wide transition-all duration-200" href="https://github.com" rel="noopener noreferrer" target="_blank">
+                <svg aria-hidden="true" class="w-4 h-4 fill-current text-slate-300" viewBox="0 0 24 24">
+                    <path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path>
+                </svg>
+                <span>View GitHub</span>
+            </a>
+        </div>
 
-            <!-- Divider line -->
-            <div class="divider-line"></div>
+        <!-- Divider line -->
+        <div class="w-full pt-4">
+            <div class="h-px w-full bg-slate-800/80"></div>
+        </div>
 
-            <!-- Metrics / Stats Grid -->
-            <div class="metrics-grid font-mono-code">
-                @if (HeroMetrics != null)
+        <!-- Metrics / Stats Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-1 font-mono">
+            @if (HeroMetrics != null)
+            {
+                @foreach (var metric in HeroMetrics)
                 {
-                    @foreach (var metric in HeroMetrics)
-                    {
-                        <div class="metric-item">
-                            <div class="metric-val">@metric.Value</div>
-                            <div class="metric-lbl">@metric.Label</div>
-                        </div>
-                    }
+                    <div>
+                        <div class="text-xl sm:text-2xl font-extrabold text-white">@metric.Value</div>
+                        <div class="text-[10px] text-slate-500 tracking-wider uppercase mt-0.5">@metric.Label</div>
+                    </div>
                 }
-            </div>
-        </section>
+            }
+        </div>
+    </section>
 
-        <!-- Right Column: Interactive Code & Architecture Map Terminal Window -->
-        <section class="hero-terminal">
-            <TerminalWindow />
-        </section>
-    </div>
+    <!-- Right Column: Interactive Code & Architecture Map Terminal Window -->
+    <section class="lg:col-span-6 w-full" data-purpose="terminal-preview-card">
+        <TerminalWindow />
+    </section>
 </main>
 
 @code {
