@@ -123,7 +123,7 @@ public class FakePortfolioService : IPortfolioService
             WatermarkType: "radar",
             AccentColor: "#7c3aed",
             DemoUrl: "/architecture",
-            SourceUrl: "https://github.com",
+            SourceUrl: "https://github.com/Cratorixx",
             IsFeatured: true
         ),
         new(
@@ -140,7 +140,7 @@ public class FakePortfolioService : IPortfolioService
             WatermarkType: "radar",
             AccentColor: "#38bdf8",
             DemoUrl: "/architecture",
-            SourceUrl: "https://github.com",
+            SourceUrl: "https://github.com/Cratorixx",
             IsFeatured: false
         ),
         new(
@@ -157,7 +157,7 @@ public class FakePortfolioService : IPortfolioService
             WatermarkType: "crosshair",
             AccentColor: "#8b5cf6",
             DemoUrl: "/architecture",
-            SourceUrl: "https://github.com",
+            SourceUrl: "https://github.com/Cratorixx",
             IsFeatured: false
         )
     ];
