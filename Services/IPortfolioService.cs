@@ -14,4 +14,8 @@ public interface IPortfolioService
     Task<SimulationTaskItem> RefreshSimulationTaskAsync(int taskId);
     Task<CaseStudyDetail> GetCaseStudyAsync(string id = "flowtrack");
     Task<bool> SubmitInquiryAsync(ContactInquiryModel inquiry);
+    Task<IReadOnlyList<ReviewItem>> GetReviewsAsync();
+    Task<ReviewItem> AddReviewAsync(ReviewSubmissionModel submission);
+    Task<bool> IncrementHelpfulCountAsync(string reviewId);
 }
+

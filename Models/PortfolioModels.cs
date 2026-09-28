@@ -89,3 +89,41 @@ public class ContactInquiryModel
     [StringLength(1000, MinimumLength = 10, ErrorMessage = "Message must be at least 10 characters.")]
     public string Message { get; set; } = string.Empty;
 }
+
+public record ReviewItem(
+    string Id,
+    string AuthorName,
+    string AuthorRole,
+    string ProjectOrTopic,
+    int Rating,
+    string Comment,
+    DateTime CreatedAt,
+    string Category,
+    string AvatarGradient = "from-purple-600 to-indigo-600",
+    int HelpfulCount = 0
+);
+
+public class ReviewSubmissionModel
+{
+    [Required(ErrorMessage = "Your name is required.")]
+    [StringLength(50, MinimumLength = 2, ErrorMessage = "Name must be between 2 and 50 characters.")]
+    public string AuthorName { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "Your role or company is required.")]
+    [StringLength(60, MinimumLength = 2, ErrorMessage = "Role must be between 2 and 60 characters.")]
+    public string AuthorRole { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "Please select a project or topic.")]
+    public string ProjectOrTopic { get; set; } = "FlowTrack Mobile App";
+
+    [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5 stars.")]
+    public int Rating { get; set; } = 5;
+
+    [Required(ErrorMessage = "Please choose a category.")]
+    public string Category { get; set; } = "Mobile Apps";
+
+    [Required(ErrorMessage = "Please enter your review or comment.")]
+    [StringLength(1000, MinimumLength = 10, ErrorMessage = "Feedback must be between 10 and 1000 characters.")]
+    public string Comment { get; set; } = string.Empty;
+}
+

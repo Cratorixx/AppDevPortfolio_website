@@ -1,0 +1,492 @@
+@page "/reviews"
+@page "/ratings"
+@inject IPortfolioService PortfolioService
+
+<PageTitle>JF — Reviews &amp; Technical Ratings</PageTitle>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+    <!-- Header Section -->
+    <section aria-label="Reviews Header" class="mb-10">
+        <!-- Monospace Pill Badge -->
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded border border-purple-500/40 bg-purple-950/30 text-purple-300 font-mono text-[11px] font-medium tracking-wide mb-4 shadow-badge-glow">
+            <span>04</span>
+            <span class="text-purple-400/60">•</span>
+            <span>COMMUNITY FEEDBACK &amp; RATINGS</span>
+        </div>
+
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+            <div>
+                <h1 class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-white tracking-tight leading-tight">
+                    Peer Reviews &amp; <span class="glow-cyan-text">Technical Appraisals</span>
+                </h1>
+                <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl">
+                    Engineering appraisals, project feedback, and collaboration reviews from peers, leads, and open-source contributors.
+                </p>
+            </div>
+
+            <!-- Quick Action button to jump to write review form -->
+            <button type="button" @onclick="ScrollToForm" class="self-start lg:self-auto inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold shadow-glow-purple transition-all duration-200">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+                <span>Write a Review</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Metrics & Rating Breakdown Dashboard -->
+    <section aria-label="Rating Overview" class="mb-12 p-6 sm:p-8 rounded-2xl bg-[#0e1422]/90 border border-white/[0.08] shadow-xl backdrop-blur-sm grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <!-- Average Score Column -->
+        <div class="md:col-span-4 flex flex-col items-center md:items-start text-center md:text-left justify-center border-b md:border-b-0 md:border-r border-white/[0.08] pb-6 md:pb-0 md:pr-8">
+            <span class="text-5xl sm:text-6xl font-black text-white tracking-tight font-mono">
+                @(AverageRating.ToString("0.0"))
+            </span>
+            <div class="flex items-center gap-1.5 my-2.5">
+                @for (int i = 1; i <= 5; i++)
+                {
+                    var isFilled = i <= Math.Round(AverageRating);
+                    <svg class="w-5 h-5 @(isFilled ? "text-amber-400 fill-amber-400" : "text-slate-600 fill-slate-700")" viewBox="0 0 24 24">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                    </svg>
+                }
+            </div>
+            <p class="text-xs font-mono text-slate-400">
+                Based on <span class="text-white font-semibold">@AllReviews.Count</span> verified peer appraisals
+            </p>
+            <div class="mt-3 inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-[11px] font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>100% Peer Endorsement Rate</span>
+            </div>
+        </div>
+
+        <!-- Star Distribution Bars Column -->
+        <div class="md:col-span-5 flex flex-col space-y-2">
+            @for (int star = 5; star >= 1; star--)
+            {
+                var s = star;
+                var count = AllReviews.Count(r => r.Rating == s);
+                var pct = AllReviews.Count > 0 ? (count * 100.0 / AllReviews.Count) : 0;
+                <div class="flex items-center gap-3 text-xs font-mono">
+                    <span class="w-7 text-slate-400 text-right">@s ★</span>
+                    <div class="flex-1 h-2 rounded-full bg-slate-800/80 overflow-hidden relative">
+                        <div class="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all duration-500" style="width: @(pct)%;"></div>
+                    </div>
+                    <span class="w-8 text-slate-400 text-right">@count</span>
+                </div>
+            }
+        </div>
+
+        <!-- Metric Highlights Column -->
+        <div class="md:col-span-3 grid grid-cols-2 md:grid-cols-1 gap-3 font-mono">
+            <div class="p-3 rounded-xl bg-[#111726] border border-white/[0.06]">
+                <div class="text-[10px] text-slate-400 uppercase tracking-wider">System Architecture</div>
+                <div class="text-lg font-bold text-cyan-400">5.0 / 5.0</div>
+            </div>
+            <div class="p-3 rounded-xl bg-[#111726] border border-white/[0.06]">
+                <div class="text-[10px] text-slate-400 uppercase tracking-wider">Code Quality &amp; Tests</div>
+                <div class="text-lg font-bold text-purple-400">4.9 / 5.0</div>
+            </div>
+            <div class="p-3 rounded-xl bg-[#111726] border border-white/[0.06] col-span-2 md:col-span-1">
+                <div class="text-[10px] text-slate-400 uppercase tracking-wider">UI / Animation Fidelity</div>
+                <div class="text-lg font-bold text-emerald-400">5.0 / 5.0</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Form: Leave a Rating & Review -->
+    <section id="write-review-form" aria-label="Review Form" class="mb-14 p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-[#111726] to-[#0c101a] border border-white/[0.1] shadow-2xl relative overflow-hidden">
+        <div class="flex items-center gap-2 mb-2 text-xs font-mono font-semibold tracking-wider text-purple-400 uppercase">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+            <span>SUBMIT FEEDBACK</span>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+            Leave a Rating &amp; Peer Review
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400 mb-6 max-w-2xl">
+            Test the live interaction! Submit a review with your rating and commentary. It will immediately publish to the interactive feed below.
+        </p>
+
+        @if (ShowSuccessBanner)
+        {
+            <div class="mb-6 p-4 rounded-xl bg-emerald-950/50 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm flex items-start gap-3 animate-fadeIn">
+                <svg class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div class="flex-1">
+                    <p class="font-bold text-white">Review published successfully!</p>
+                    <p class="text-emerald-300/80 mt-0.5">Your rating and comment have been added to the peer reviews feed in memory.</p>
+                </div>
+                <button type="button" @onclick="DismissSuccessBanner" class="text-emerald-400 hover:text-white text-xs font-mono">
+                    ✕
+                </button>
+            </div>
+        }
+
+        <EditForm Model="@NewSubmission" OnValidSubmit="HandleSubmitReview">
+            <DataAnnotationsValidator />
+
+            <!-- Interactive Star Rating Selector -->
+            <div class="mb-6 p-4 rounded-xl bg-[#090d16] border border-white/[0.08]">
+                <label class="block text-xs font-mono font-semibold text-slate-300 mb-2">
+                    SELECT RATING (1 TO 5 STARS)
+                </label>
+                <div class="flex flex-wrap items-center gap-4">
+                    <div class="flex items-center gap-1.5" role="radiogroup" aria-label="Star Rating Selector">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            var starVal = i;
+                            var isActive = starVal <= (HoverRating > 0 ? HoverRating : NewSubmission.Rating);
+                            <button type="button"
+                                    class="p-1 rounded-lg transition-transform hover:scale-125 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                                    @onclick="@(() => SelectRating(starVal))"
+                                    @onmouseover="@(() => HoverRating = starVal)"
+                                    @onmouseout="@(() => HoverRating = 0)"
+                                    aria-label="Rate @starVal stars">
+                                <svg class="w-8 h-8 transition-colors duration-150 @(isActive ? "text-amber-400 fill-amber-400 filter drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]" : "text-slate-600 fill-slate-800")" viewBox="0 0 24 24">
+                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                </svg>
+                            </button>
+                        }
+                    </div>
+                    <div class="font-mono text-xs text-amber-300 px-3 py-1 rounded bg-amber-950/30 border border-amber-500/20">
+                        @GetRatingLabel(HoverRating > 0 ? HoverRating : NewSubmission.Rating)
+                    </div>
+                </div>
+                <ValidationMessage For="@(() => NewSubmission.Rating)" class="text-xs text-rose-400 mt-1 block font-mono" />
+            </div>
+
+            <!-- Author & Role Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="block text-xs font-mono font-semibold text-slate-300 mb-1.5" for="reviewerName">
+                        YOUR NAME / HANDLE <span class="text-purple-400">*</span>
+                    </label>
+                    <InputText id="reviewerName" class="w-full px-3.5 py-2.5 rounded-lg bg-[#07090f] border border-white/10 text-white text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition" @bind-Value="NewSubmission.AuthorName" placeholder="e.g. Alex Rivera" />
+                    <ValidationMessage For="@(() => NewSubmission.AuthorName)" class="text-xs text-rose-400 mt-1 block font-mono" />
+                </div>
+                <div>
+                    <label class="block text-xs font-mono font-semibold text-slate-300 mb-1.5" for="reviewerRole">
+                        ROLE / AFFILIATION <span class="text-purple-400">*</span>
+                    </label>
+                    <InputText id="reviewerRole" class="w-full px-3.5 py-2.5 rounded-lg bg-[#07090f] border border-white/10 text-white text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition" @bind-Value="NewSubmission.AuthorRole" placeholder="e.g. Staff Engineer at TechCorp" />
+                    <ValidationMessage For="@(() => NewSubmission.AuthorRole)" class="text-xs text-rose-400 mt-1 block font-mono" />
+                </div>
+            </div>
+
+            <!-- Project/Topic & Category Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="block text-xs font-mono font-semibold text-slate-300 mb-1.5" for="reviewerProject">
+                        PROJECT / TOPIC REVIEWED
+                    </label>
+                    <InputSelect id="reviewerProject" class="w-full px-3.5 py-2.5 rounded-lg bg-[#07090f] border border-white/10 text-white text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition" @bind-Value="NewSubmission.ProjectOrTopic">
+                        <option value="FlowTrack Mobile App">FlowTrack Mobile App</option>
+                        <option value="Distributed Event Broker">Distributed Event Broker</option>
+                        <option value="Terminal UI &amp; Diagnostics">Terminal UI &amp; Diagnostics</option>
+                        <option value="System Architecture Consultation">System Architecture Consultation</option>
+                        <option value="General Code Quality &amp; Delivery">General Code Quality &amp; Delivery</option>
+                    </InputSelect>
+                </div>
+                <div>
+                    <label class="block text-xs font-mono font-semibold text-slate-300 mb-1.5" for="reviewerCategory">
+                        CATEGORY TAG
+                    </label>
+                    <InputSelect id="reviewerCategory" class="w-full px-3.5 py-2.5 rounded-lg bg-[#07090f] border border-white/10 text-white text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition" @bind-Value="NewSubmission.Category">
+                        <option value="Mobile Apps">Mobile Apps</option>
+                        <option value="System Architecture">System Architecture</option>
+                        <option value="UI/UX">UI/UX</option>
+                        <option value="Code Quality">Code Quality</option>
+                    </InputSelect>
+                </div>
+            </div>
+
+            <!-- Comment / Review Textarea -->
+            <div class="mb-5">
+                <div class="flex items-center justify-between mb-1.5">
+                    <label class="block text-xs font-mono font-semibold text-slate-300" for="reviewerComment">
+                        YOUR COMMENT / DETAILED FEEDBACK <span class="text-purple-400">*</span>
+                    </label>
+                    <span class="text-[11px] font-mono text-slate-500">
+                        @(NewSubmission.Comment?.Length ?? 0) / 1000 characters
+                    </span>
+                </div>
+                <InputTextArea id="reviewerComment" rows="4" class="w-full px-3.5 py-2.5 rounded-lg bg-[#07090f] border border-white/10 text-white text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition placeholder:text-slate-600" @bind-Value="NewSubmission.Comment" placeholder="Write your review here. What impressed you about the architecture, code cleanliness, or mobile implementation?" />
+                <ValidationMessage For="@(() => NewSubmission.Comment)" class="text-xs text-rose-400 mt-1 block font-mono" />
+            </div>
+
+            <!-- Submit Action -->
+            <div class="flex items-center justify-end gap-3 pt-2">
+                <button type="submit" disabled="@IsSubmitting" class="inline-flex items-center space-x-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-50 text-white text-xs font-semibold shadow-glow-purple transition-all duration-200">
+                    @if (IsSubmitting)
+                    {
+                        <svg class="animate-spin w-4 h-4 text-white" viewBox="0 0 24 24" fill="none">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                        </svg>
+                        <span>Publishing...</span>
+                    }
+                    else
+                    {
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13"></path>
+                            <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+                        </svg>
+                        <span>Post Rating &amp; Comment</span>
+                    }
+                </button>
+            </div>
+        </EditForm>
+    </section>
+
+    <!-- Reviews Feed & Filtering Controls -->
+    <section aria-label="Reviews Feed">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <!-- Filter Pills -->
+            <div class="flex items-center gap-1.5 p-1 rounded-xl bg-[#0e1422]/90 border border-white/[0.08] text-xs font-medium text-slate-400 overflow-x-auto max-w-full custom-scrollbar">
+                <button type="button" class="px-3 py-1.5 rounded-lg font-medium transition-all duration-150 @(SelectedFilter == "All" ? "bg-[#5b21b6] text-white shadow-sm" : "hover:text-slate-200")"
+                        @onclick='@(() => SetFilter("All"))'>
+                    All (@AllReviews.Count)
+                </button>
+                <button type="button" class="px-3 py-1.5 rounded-lg whitespace-nowrap font-medium transition-all duration-150 @(SelectedFilter == "5Stars" ? "bg-[#5b21b6] text-white shadow-sm" : "hover:text-slate-200")"
+                        @onclick='@(() => SetFilter("5Stars"))'>
+                    5 Stars (@AllReviews.Count(r => r.Rating == 5))
+                </button>
+                <button type="button" class="px-3 py-1.5 rounded-lg whitespace-nowrap font-medium transition-all duration-150 @(SelectedFilter == "Mobile Apps" ? "bg-[#5b21b6] text-white shadow-sm" : "hover:text-slate-200")"
+                        @onclick='@(() => SetFilter("Mobile Apps"))'>
+                    Mobile Apps
+                </button>
+                <button type="button" class="px-3 py-1.5 rounded-lg whitespace-nowrap font-medium transition-all duration-150 @(SelectedFilter == "System Architecture" ? "bg-[#5b21b6] text-white shadow-sm" : "hover:text-slate-200")"
+                        @onclick='@(() => SetFilter("System Architecture"))'>
+                    Architecture
+                </button>
+                <button type="button" class="px-3 py-1.5 rounded-lg whitespace-nowrap font-medium transition-all duration-150 @(SelectedFilter == "UI/UX" ? "bg-[#5b21b6] text-white shadow-sm" : "hover:text-slate-200")"
+                        @onclick='@(() => SetFilter("UI/UX"))'>
+                    UI/UX
+                </button>
+                <button type="button" class="px-3 py-1.5 rounded-lg whitespace-nowrap font-medium transition-all duration-150 @(SelectedFilter == "Code Quality" ? "bg-[#5b21b6] text-white shadow-sm" : "hover:text-slate-200")"
+                        @onclick='@(() => SetFilter("Code Quality"))'>
+                    Code Quality
+                </button>
+            </div>
+
+            <!-- Search Filter -->
+            <div class="relative w-full md:w-64">
+                <input type="text"
+                       class="w-full px-3.5 py-1.5 pl-9 rounded-lg bg-[#0e1422] border border-white/[0.08] text-white text-xs focus:outline-none focus:border-purple-500 font-mono"
+                       placeholder="Filter by keyword..."
+                       @bind="SearchQuery"
+                       @bind:event="oninput" />
+                <svg class="w-3.5 h-3.5 text-slate-500 absolute left-3 top-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Review Cards Grid -->
+        @if (FilteredReviews.Count == 0)
+        {
+            <div class="p-12 text-center rounded-2xl bg-[#0e1422]/60 border border-white/[0.06] text-slate-400 font-mono text-xs">
+                No reviews found matching your selected criteria.
+            </div>
+        }
+        else
+        {
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                @foreach (var review in FilteredReviews)
+                {
+                    <article class="p-6 rounded-2xl bg-[#0d121d]/90 border border-slate-800/80 hover:border-purple-500/30 transition-all duration-200 shadow-md flex flex-col justify-between" data-purpose="review-card">
+                        <!-- Top Row: Avatar, Info, and Rating -->
+                        <div>
+                            <div class="flex items-start justify-between gap-4 mb-3.5">
+                                <div class="flex items-center gap-3">
+                                    <!-- Monogram Avatar -->
+                                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr @review.AvatarGradient flex items-center justify-center text-white font-bold text-xs tracking-wider ring-1 ring-white/20 shrink-0">
+                                        @GetInitials(review.AuthorName)
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <div class="flex items-center gap-2">
+                                            <h3 class="font-bold text-white text-sm">@review.AuthorName</h3>
+                                            <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-cyan-950/40 border border-cyan-500/30 text-cyan-400 text-[10px] font-mono">
+                                                <svg class="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                                </svg>
+                                                Verified Peer
+                                            </span>
+                                        </div>
+                                        <span class="text-xs text-slate-400">@review.AuthorRole</span>
+                                    </div>
+                                </div>
+
+                                <!-- Star Badges -->
+                                <div class="flex items-center gap-0.5" aria-label="@review.Rating out of 5 stars">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        var filled = i <= review.Rating;
+                                        <svg class="w-4 h-4 @(filled ? "text-amber-400 fill-amber-400" : "text-slate-700 fill-slate-800")" viewBox="0 0 24 24">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                        </svg>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Context Topic & Category Tags -->
+                            <div class="flex flex-wrap items-center gap-2 mb-3.5">
+                                <span class="px-2 py-0.5 rounded bg-purple-950/40 border border-purple-500/30 text-purple-300 font-mono text-[11px]">
+                                    @review.ProjectOrTopic
+                                </span>
+                                <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/10 text-slate-300 font-mono text-[11px]">
+                                    @review.Category
+                                </span>
+                            </div>
+
+                            <!-- Comment Body -->
+                            <p class="text-slate-300 text-xs sm:text-[13.5px] leading-relaxed font-normal">
+                                "@review.Comment"
+                            </p>
+                        </div>
+
+                        <!-- Card Footer: Date & Helpful Thumbs Up Counter -->
+                        <div class="mt-5 pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-slate-500">
+                            <span>@review.CreatedAt.ToString("MMM dd, yyyy")</span>
+
+                            <button type="button"
+                                    @onclick="@(() => HandleHelpfulClick(review.Id))"
+                                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#111726] hover:bg-[#182136] text-slate-400 hover:text-white border border-white/[0.08] transition-all">
+                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                                </svg>
+                                <span>Helpful (@review.HelpfulCount)</span>
+                            </button>
+                        </div>
+                    </article>
+                }
+            </div>
+        }
+    </section>
+</main>
+
+@code {
+    private List<ReviewItem> AllReviews { get; set; } = new();
+    private ReviewSubmissionModel NewSubmission { get; set; } = new();
+    private int HoverRating { get; set; } = 0;
+    private bool IsSubmitting { get; set; } = false;
+    private bool ShowSuccessBanner { get; set; } = false;
+    private string SelectedFilter { get; set; } = "All";
+    private string SearchQuery { get; set; } = string.Empty;
+
+    private double AverageRating => AllReviews.Count > 0 ? AllReviews.Average(r => r.Rating) : 5.0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadReviews();
+    }
+
+    private async Task LoadReviews()
+    {
+        var items = await PortfolioService.GetReviewsAsync();
+        AllReviews = items.ToList();
+    }
+
+    private void SelectRating(int rating)
+    {
+        NewSubmission.Rating = rating;
+    }
+
+    private string GetRatingLabel(int rating) => rating switch
+    {
+        5 => "5/5 · Exceptional (Gold Standard)",
+        4 => "4/5 · Very Good (Production Ready)",
+        3 => "3/5 · Solid (Meets Standard)",
+        2 => "2/5 · Needs Improvement",
+        _ => "1/5 · Unsatisfactory"
+    };
+
+    private async Task HandleSubmitReview()
+    {
+        IsSubmitting = true;
+        try
+        {
+            var added = await PortfolioService.AddReviewAsync(NewSubmission);
+            AllReviews.Insert(0, added);
+
+            // Reset form for next entry
+            NewSubmission = new ReviewSubmissionModel();
+            HoverRating = 0;
+            ShowSuccessBanner = true;
+        }
+        finally
+        {
+            IsSubmitting = false;
+        }
+    }
+
+    private void DismissSuccessBanner()
+    {
+        ShowSuccessBanner = false;
+    }
+
+    private async Task HandleHelpfulClick(string reviewId)
+    {
+        var success = await PortfolioService.IncrementHelpfulCountAsync(reviewId);
+        if (success)
+        {
+            var index = AllReviews.FindIndex(r => r.Id == reviewId);
+            if (index >= 0)
+            {
+                var r = AllReviews[index];
+                AllReviews[index] = r with { HelpfulCount = r.HelpfulCount + 1 };
+            }
+        }
+    }
+
+    private void SetFilter(string filter)
+    {
+        SelectedFilter = filter;
+    }
+
+    private List<ReviewItem> FilteredReviews
+    {
+        get
+        {
+            var list = AllReviews.AsEnumerable();
+
+            if (SelectedFilter == "5Stars")
+            {
+                list = list.Where(r => r.Rating == 5);
+            }
+            else if (SelectedFilter != "All")
+            {
+                list = list.Where(r => r.Category.Equals(SelectedFilter, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (!string.IsNullOrWhiteSpace(SearchQuery))
+            {
+                var q = SearchQuery.Trim().ToLowerInvariant();
+                list = list.Where(r =>
+                    r.AuthorName.ToLowerInvariant().Contains(q) ||
+                    r.AuthorRole.ToLowerInvariant().Contains(q) ||
+                    r.Comment.ToLowerInvariant().Contains(q) ||
+                    r.ProjectOrTopic.ToLowerInvariant().Contains(q));
+            }
+
+            return list.ToList();
+        }
+    }
+
+    private string GetInitials(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name)) return "JF";
+        var parts = name.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length == 1) return parts[0][0].ToString().ToUpperInvariant();
+        return $"{parts[0][0]}{parts[^1][0]}".ToUpperInvariant();
+    }
+
+    private void ScrollToForm()
+    {
+        ShowSuccessBanner = false;
+    }
+}

@@ -27,3 +27,35 @@ C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\ref\App_Dev.dll
 C:\Users\L23Y16W12\Desktop\App Dev\obj\Debug\net8.0\App Dev.sourcelink.json
 C:\Users\L23Y16W12\Desktop\App Dev\bin\Debug\net8.0\package-lock.json
 C:\Users\L23Y16W12\Desktop\App Dev\bin\Debug\net8.0\package.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\bin\Debug\net8.0\appsettings.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\bin\Debug\net8.0\package-lock.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\bin\Debug\net8.0\package.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\bin\Debug\net8.0\App_Dev.staticwebassets.runtime.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\bin\Debug\net8.0\App_Dev.staticwebassets.endpoints.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\bin\Debug\net8.0\App_Dev.exe
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\bin\Debug\net8.0\App_Dev.deps.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\bin\Debug\net8.0\App_Dev.runtimeconfig.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\bin\Debug\net8.0\App_Dev.dll
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\bin\Debug\net8.0\App_Dev.pdb
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\App Dev.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\App Dev.AssemblyInfoInputs.cache
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\App Dev.AssemblyInfo.cs
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\App Dev.csproj.CoreCompileInputs.cache
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\App_Dev.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\App Dev.sourcelink.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\scopedcss\bundle\App_Dev.styles.css
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\swae.build.ex.cache
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\App_Dev.dll
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\refint\App_Dev.dll
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\App_Dev.pdb
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\App Dev.genruntimeconfig.cache
+C:\Users\johan\OneDrive\Desktop\App_Dev\portforlio_website\AppDevPortfolio_website\obj\Debug\net8.0\ref\App_Dev.dll

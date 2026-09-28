@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>App Dev</RootNamespace>
     <AssemblyName>$(AssemblyName.Replace(' ', '_'))</AssemblyName>
+    <RollForward>Major</RollForward>
   </PropertyGroup>
 
   <Target Name="BuildTailwind" BeforeTargets="Build">

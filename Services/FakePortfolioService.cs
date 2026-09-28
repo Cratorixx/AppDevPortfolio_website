@@ -262,4 +262,115 @@ public class FakePortfolioService : IPortfolioService
         await Task.Delay(800);
         return true;
     }
+
+    private static readonly List<ReviewItem> _reviews =
+    [
+        new(
+            Id: "rev-1",
+            AuthorName: "Elena Rostova",
+            AuthorRole: "Senior Android Tech Lead @ Nexa",
+            ProjectOrTopic: "FlowTrack Mobile App",
+            Rating: 5,
+            Comment: "The offline-first architecture with vector clock conflict resolution in FlowTrack is phenomenal. We benchmarked it during harsh cellular network degradation and observed zero state divergence or data loss. Superb execution!",
+            CreatedAt: DateTime.UtcNow.AddDays(-12),
+            Category: "Mobile Apps",
+            AvatarGradient: "from-purple-600 to-indigo-600",
+            HelpfulCount: 14
+        ),
+        new(
+            Id: "rev-2",
+            AuthorName: "Marcus Vance",
+            AuthorRole: "Principal Systems Architect @ CloudScale",
+            ProjectOrTopic: "Distributed Event Broker",
+            Rating: 5,
+            Comment: "Top-tier concurrency design and Netty NIO tuning. Achieving 100k active persistent WebSocket connections per pod while keeping memory footprint lean is no small feat. Very clean boundary separation.",
+            CreatedAt: DateTime.UtcNow.AddDays(-25),
+            Category: "System Architecture",
+            AvatarGradient: "from-cyan-600 to-blue-600",
+            HelpfulCount: 9
+        ),
+        new(
+            Id: "rev-3",
+            AuthorName: "Claire Zhang",
+            AuthorRole: "Product Design Lead @ Studio Apex",
+            ProjectOrTopic: "UI/UX & Design Systems",
+            Rating: 5,
+            Comment: "It is exceptionally rare to find an engineer who writes high-throughput backend code while having this level of finesse for micro-interactions, dark mode telemetry, and sub-16ms layout animations. A pleasure to collaborate with!",
+            CreatedAt: DateTime.UtcNow.AddDays(-34),
+            Category: "UI/UX",
+            AvatarGradient: "from-emerald-600 to-teal-600",
+            HelpfulCount: 6
+        ),
+        new(
+            Id: "rev-4",
+            AuthorName: "David Thorne",
+            AuthorRole: "Open Source Core Maintainer",
+            ProjectOrTopic: "Task Orchestrator & CLI Tooling",
+            Rating: 4,
+            Comment: "Modular architecture, exhaustive unit testing, and highly readable idiomatic code. PRs were thoroughly documented and the CI pipeline runs blazing fast. Solid engineering discipline throughout.",
+            CreatedAt: DateTime.UtcNow.AddDays(-48),
+            Category: "Code Quality",
+            AvatarGradient: "from-amber-600 to-rose-600",
+            HelpfulCount: 4
+        )
+    ];
+
+    public Task<IReadOnlyList<ReviewItem>> GetReviewsAsync()
+    {
+        lock (_reviews)
+        {
+            return Task.FromResult<IReadOnlyList<ReviewItem>>(_reviews.OrderByDescending(r => r.CreatedAt).ToList());
+        }
+    }
+
+    public async Task<ReviewItem> AddReviewAsync(ReviewSubmissionModel submission)
+    {
+        await Task.Delay(300); // Simulate network latency
+
+        var gradients = new[]
+        {
+            "from-purple-600 to-pink-600",
+            "from-cyan-600 to-teal-600",
+            "from-indigo-600 to-blue-600",
+            "from-emerald-600 to-cyan-600",
+            "from-amber-500 to-orange-600"
+        };
+        var randomGradient = gradients[Random.Shared.Next(gradients.Length)];
+
+        var newReview = new ReviewItem(
+            Id: $"rev-{Guid.NewGuid().ToString("N")[..8]}",
+            AuthorName: submission.AuthorName.Trim(),
+            AuthorRole: submission.AuthorRole.Trim(),
+            ProjectOrTopic: submission.ProjectOrTopic.Trim(),
+            Rating: Math.Clamp(submission.Rating, 1, 5),
+            Comment: submission.Comment.Trim(),
+            CreatedAt: DateTime.UtcNow,
+            Category: submission.Category,
+            AvatarGradient: randomGradient,
+            HelpfulCount: 0
+        );
+
+        lock (_reviews)
+        {
+            _reviews.Insert(0, newReview);
+        }
+
+        return newReview;
+    }
+
+    public Task<bool> IncrementHelpfulCountAsync(string reviewId)
+    {
+        lock (_reviews)
+        {
+            var index = _reviews.FindIndex(r => r.Id == reviewId);
+            if (index >= 0)
+            {
+                var existing = _reviews[index];
+                _reviews[index] = existing with { HelpfulCount = existing.HelpfulCount + 1 };
+                return Task.FromResult(true);
+            }
+        }
+        return Task.FromResult(false);
+    }
 }
+
